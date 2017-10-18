@@ -1,5 +1,5 @@
 #  Human-level control through deep reinforcement learning
-> Project for the course Capita Selecta Computer Science: Artificial Intelligence at KU Leuven
+> Project for the course [Capita Selecta Computer Science: Artificial Intelligence](https://onderwijsaanbod.kuleuven.be/syllabi/e/H05N0AE.htm#activetab=doelstellingen_idm1514848) at KU Leuven
 
 TODO: Description of project.
 
