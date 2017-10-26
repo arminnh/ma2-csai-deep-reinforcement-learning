@@ -3,6 +3,16 @@
 
 TODO: Description of project.
 
+## Links
+- [Human-level control through deep reinforcement learning slides](http://www.teach.cs.toronto.edu/~csc2542h/fall/material/csc2542f16_dqn.pdf)
+- [OpenAI Baselines: DQN](https://blog.openai.com/openai-baselines-dqn/)
+- [Learning Diverse Skills via Maximum Entropy Deep Reinforcement Learning](http://bair.berkeley.edu/blog/2017/10/06/soft-q-learning/)
+- [MIT 6.S094: Deep Learning for Self-Driving Cars](http://selfdrivingcars.mit.edu/deeptraffic/)
+- [Self-Driving Truck in Euro Truck Simulator 2, trained via Reinforcement Learning](https://github.com/aleju/self-driving-truck)
+- [Competitive Self-Play](https://blog.openai.com/competitive-self-play/)
+- [The Self Learning Quant](https://hackernoon.com/the-self-learning-quant-d3329fcc9915)
+- [stock market environment using OpenGym with Deep Q-learning and Policy Gradient](https://github.com/kh-kim/stock_market_reinforcement_learning)
+
 <!-- ![](header.png) -->
 
 <!--
