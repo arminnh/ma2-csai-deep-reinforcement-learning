@@ -12,6 +12,8 @@ TODO: Description of project.
 - [Competitive Self-Play](https://blog.openai.com/competitive-self-play/)
 - [The Self Learning Quant](https://hackernoon.com/the-self-learning-quant-d3329fcc9915)
 - [stock market environment using OpenGym with Deep Q-learning and Policy Gradient](https://github.com/kh-kim/stock_market_reinforcement_learning)
+- [github Autonomous driving in the Unity engine.](https://github.com/alexhagiopol/end-to-end-deep-learning)
+- [pdf End to End Learning for Self-Driving Cars](https://arxiv.org/pdf/1604.07316.pdf)
 
 <!-- ![](header.png) -->
 
