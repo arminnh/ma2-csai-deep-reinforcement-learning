@@ -1,16 +1,18 @@
+// 2 hidden layers, temporal window of size 2, medium view around the car
+
 //<![CDATA[
 
 // a few things don't have var in front of them - they update already existing variables the game needs
 // Defines the most basic settings – for larger inputs you should probably increase the number of train iterations. Actually looking ahead a few patches, and at least one lane to the side is probably a good idea as well.
-lanesSide = 0;
-patchesAhead = 1;
-patchesBehind = 0;
-trainIterations = 10000;
+lanesSide = 2;
+patchesAhead = 15;
+patchesBehind = 6;
+trainIterations = 20000;
 
 // Specifies some more details about the input – you don’t need to touch this part (except maybe the temporal window).
 var num_inputs = (lanesSide * 2 + 1) * (patchesAhead + patchesBehind);
 var num_actions = 5;
-var temporal_window = 3;
+var temporal_window = 2;
 var network_size = num_inputs * temporal_window + num_actions * temporal_window + num_inputs;
 
 var layer_defs = [];
@@ -24,15 +26,22 @@ layer_defs.push({
 // We added one basic hidden layer with just one neuron to show you how to do that – you should definitely change that
 layer_defs.push({
     type: 'fc',
-    num_neurons: 1,
+    num_neurons: 50,
     activation: 'relu'
 });
-// And in the end there is the final regression layer that decides on the action, which probably is fine as it is
+layer_defs.push({
+    type: 'fc',
+    num_neurons: 25,
+    activation: 'relu'
+});
+// And in the end there is the final (L2) regression layer that decides on the action, which probably is fine as it is
 layer_defs.push({
     type: 'regression',
     num_neurons: num_actions
 });
 
+// options for the Temporal Difference learner that trains the above net
+// by backpropping the temporal difference learning rule.
 var tdtrainer_options = {
     learning_rate: 0.001,
     momentum: 0.0,
@@ -47,8 +56,8 @@ opt.start_learn_threshold = 500;
 opt.gamma = 0.7;
 opt.learning_steps_total = 10000;
 opt.learning_steps_burnin = 1000;
-opt.epsilon_min = 0.0;
-opt.epsilon_test_time = 0.0;
+opt.epsilon_min = 0.05;
+opt.epsilon_test_time = 0.05;
 opt.layer_defs = layer_defs;
 opt.tdtrainer_options = tdtrainer_options;
 // There are a lot more options for the Q-Learning part – details on them can be found in the comments of the code at the following link: https://github.com/karpathy/convnetjs/blob/master/build/deepqlearn.js These are mostly interesting for more advanced optimisations of your net.
@@ -58,7 +67,10 @@ brain = new deepqlearn.Brain(num_inputs, num_actions, opt);
 
 // no action = 0, accelerate = 1, decelerate = 2, goLeft = 3, goRight = 4
 learn = function (state, lastReward) {
-    brain.backward(lastReward);
+   // communicate the reward
+   brain.backward(lastReward);
+
+    // get optimal action from learned policy
     var action = brain.forward(state);
 
     draw_net();
