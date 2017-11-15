@@ -2,6 +2,13 @@
 > Project for the course [Capita Selecta Computer Science: Artificial Intelligence](https://onderwijsaanbod.kuleuven.be/syllabi/e/H05N0AE.htm#activetab=doelstellingen_idm1514848) at KU Leuven
 
 TODO: Description of project.
+# Proposal
+1. Discuss how Reinforcement learning works (5 mins)
+2. Discuss how neural networks work and in particular Convolutional neural nets (5 mins)
+3. Discuss how we can combine these two topics into one.
+4. Demo
+5. What is after this? [Curious Reinforcment Learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/)
+
 
 ## Links
 - [Human-level control through deep reinforcement learning slides](http://www.teach.cs.toronto.edu/~csc2542h/fall/material/csc2542f16_dqn.pdf)
