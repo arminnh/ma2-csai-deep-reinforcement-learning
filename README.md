@@ -14,7 +14,7 @@ TODO: Description of project.
 - [stock market environment using OpenGym with Deep Q-learning and Policy Gradient](https://github.com/kh-kim/stock_market_reinforcement_learning)
 - [github Autonomous driving in the Unity engine.](https://github.com/alexhagiopol/end-to-end-deep-learning)
 - [pdf End to End Learning for Self-Driving Cars](https://arxiv.org/pdf/1604.07316.pdf)
-
+- [ConvNetJS Deep Q Learning Demo](http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html)
 <!-- ![](header.png) -->
 
 <!--
@@ -41,7 +41,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 TODO: What things you need to install the software and how to install them
 
-    dep 1, dep 2, ... TODO 
+    dep 1, dep 2, ... TODO
 
 ### Installing
 TODO: A step by step series of examples that tell you have to get a development env running
@@ -52,7 +52,7 @@ pip3 install -r requirements.txt
 ```
 
 ### Data
-Load the data into a running MongoDB instance 
+Load the data into a running MongoDB instance
 ```sh
 mongorestore --drop -d cern_ldb --archive=data-cern/cern_ldb.mongodb.20170309.mki_v0_5.gz --gzip
 ```
