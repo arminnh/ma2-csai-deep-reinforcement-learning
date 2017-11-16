@@ -361,7 +361,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -385,7 +385,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!1 &165801232
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +791,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 341300511}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5085c1d8e173d4a7aad91e9d377319fc, type: 3}
   m_Name: 
@@ -5657,7 +5657,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1009975379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: -0.15658}
+  m_LocalPosition: {x: 0, y: 0.71, z: -0.15658}
   m_LocalScale: {x: 2.43, y: 0.41, z: 4.47}
   m_Children: []
   m_Father: {fileID: 635230536}
@@ -7719,7 +7719,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1719258179}
-  - component: {fileID: 1719258180}
   m_Layer: 0
   m_Name: WheelsHubs
   m_TagString: Untagged
@@ -7744,19 +7743,6 @@ Transform:
   m_Father: {fileID: 332488660}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1719258180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1719258178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5085c1d8e173d4a7aad91e9d377319fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  touchesTrack: 0
-  test: 0
 --- !u!1 &1756317532
 GameObject:
   m_ObjectHideFlags: 0
@@ -8110,7 +8096,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1814204553}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5085c1d8e173d4a7aad91e9d377319fc, type: 3}
   m_Name: 

@@ -14,21 +14,17 @@ public class CarTouchesTrack : MonoBehaviour {
 		
 	void Update()
 	{
-
+		touchesTrack = IsGrounded();
 	}
 
-	void OnCollisionEnter(Collision collision)
+	public bool IsGrounded()  
 	{
-			touchesTrack = true;
+		RaycastHit hit;
+		if (Physics.Raycast (transform.position, -Vector3.up, out hit, 5)) {
+			if (hit.collider != null && hit.collider.name == "GroundTrack")
+				return true;
+		}
+		return false;
 	}
-
-	void OnCollisionStay(Collision collision){
-		Debug.Log (collision.gameObject.name);
-	}
-
-	void OnCollisionExit(Collision collision)
-	{
-
-		touchesTrack = false;
-	}
+		
 }
