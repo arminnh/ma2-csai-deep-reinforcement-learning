@@ -3,6 +3,13 @@
 
 TODO: Description of project.
 
+# Proposal
+1. Discuss how Reinforcement learning works (5 mins)
+2. Discuss how neural networks work and in particular Convolutional neural nets (5 mins)
+3. Discuss how we can combine these two topics into one.
+4. Demo
+
+
 ## Links
 - [Human-level control through deep reinforcement learning slides](http://www.teach.cs.toronto.edu/~csc2542h/fall/material/csc2542f16_dqn.pdf)
 - [OpenAI Baselines: DQN](https://blog.openai.com/openai-baselines-dqn/)
@@ -39,7 +46,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 TODO: What things you need to install the software and how to install them
 
-    dep 1, dep 2, ... TODO 
+    dep 1, dep 2, ... TODO
 
 ### Installing
 TODO: A step by step series of examples that tell you have to get a development env running
@@ -50,7 +57,7 @@ pip3 install -r requirements.txt
 ```
 
 ### Data
-Load the data into a running MongoDB instance 
+Load the data into a running MongoDB instance
 ```sh
 mongorestore --drop -d cern_ldb --archive=data-cern/cern_ldb.mongodb.20170309.mki_v0_5.gz --gzip
 ```

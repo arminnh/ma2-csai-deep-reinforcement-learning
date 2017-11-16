@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_SelfDrivingCar/Scripts/CarTouchesTrack.cs">
+    <Files>
+      <File FileName="Assets/1_SelfDrivingCar/Scripts/CarTouchesTrack.cs" Line="32" Column="3" />
+      <File FileName="Assets/Standard Assets/Vehicles/Car/Scripts/WheelEffects.cs" Line="34" Column="57" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
