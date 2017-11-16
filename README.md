@@ -2,6 +2,13 @@
 > Project for the course [Capita Selecta Computer Science: Artificial Intelligence](https://onderwijsaanbod.kuleuven.be/syllabi/e/H05N0AE.htm#activetab=doelstellingen_idm1514848) at KU Leuven
 
 TODO: Description of project.
+# Proposal
+1. Discuss how Reinforcement learning works (5 mins)
+2. Discuss how neural networks work and in particular Convolutional neural nets (5 mins)
+3. Discuss how we can combine these two topics into one.
+4. Demo
+5. What is after this? [Curious Reinforcment Learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/)
+
 
 # Proposal
 1. Discuss how Reinforcement learning works (5 mins)
@@ -19,7 +26,11 @@ TODO: Description of project.
 - [Competitive Self-Play](https://blog.openai.com/competitive-self-play/)
 - [The Self Learning Quant](https://hackernoon.com/the-self-learning-quant-d3329fcc9915)
 - [stock market environment using OpenGym with Deep Q-learning and Policy Gradient](https://github.com/kh-kim/stock_market_reinforcement_learning)
-
+- [github Autonomous driving in the Unity engine.](https://github.com/alexhagiopol/end-to-end-deep-learning)
+- [pdf End to End Learning for Self-Driving Cars](https://arxiv.org/pdf/1604.07316.pdf)
+- [ConvNetJS Deep Q Learning Demo](http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html)
+- [ConvNetJS: Deep Learning in your browser](http://cs.stanford.edu/people/karpathy/convnetjs/docs.html)
+- [A Beginner's Guide To Understanding Convolutional Neural Networks](https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner's-Guide-To-Understanding-Convolutional-Neural-Networks/)
 <!-- ![](header.png) -->
 
 <!--
