@@ -1,23 +1,46 @@
 #  Human-level control through deep reinforcement learning
 > Project for the course [Capita Selecta Computer Science: Artificial Intelligence](https://onderwijsaanbod.kuleuven.be/syllabi/e/H05N0AE.htm#activetab=doelstellingen_idm1514848) at KU Leuven
 
-TODO: Description of project.
-# Proposal
-1. Discuss how Reinforcement learning works (5 mins)
-2. Discuss how neural networks work and in particular Convolutional neural nets (5 mins)
-3. Discuss how we can combine these two topics into one.
+### Plan for presentation
+1. Short intro to reinforcement learning works (5 mins)
+2. Short intro to neural networks and in particular Convolutional neural networks (5 mins)
+3. Explanation of deep reinforcement learning. Discuss how the two previous topics can be combined into one.
 4. Demo
-5. What is after this? [Curious Reinforcment Learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/)
+5. What comes after deep reinforcement learning? Small talk about curiosity learning. [Curious Reinforcment Learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/)
+
+### Demo based on project
+Application of deep reinforcement learning for self driving cars in a virtual world.
+
+#### Planned neural network
+* Convolutional neural network
+* Inputs = image of view in front of car + velocity of car + acceleration of car + (maybe) angle of steering wheel + (maybe) g forces on car
+* Outputs = move left, move right, accelerate, brake, do nothing
+* Heuristic for scoring:
+* * Reward:
+* * * Higher velocity
+* * * Lower times to reach destination (so the car goes in the right direction with the higher velocity)
+* * * Staying near middle (or one side) of track (maybe)
+* * Punish:
+* * * Too fast
+* * * Not on track
+* * * Collisions
+* * * Distance from destination
+
+#### Requirements in virtual environment
+* Tracks to drive on
+* Car + methods to drive the car
+* Camera in the virtual world (from the perspective of a driver) that allow for image streams to be used as input to the NN.
+* A way to retrieve the following data of the car: velocity, acceleration, angle of steering wheel, (maybe) g forces on car
+* A way to know if the car is still on the track
+* A way to link the NN to the car camera and car controls.
+
+#### Curiosity learning
+https://www.youtube.com/watch?v=J3FHOyhUn3A  
+https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/  
+Paper: https://arxiv.org/pdf/1705.05363.pdf
 
 
-# Proposal
-1. Discuss how Reinforcement learning works (5 mins)
-2. Discuss how neural networks work and in particular Convolutional neural nets (5 mins)
-3. Discuss how we can combine these two topics into one.
-4. Demo
-
-
-## Links
+### Links
 - [Human-level control through deep reinforcement learning slides](http://www.teach.cs.toronto.edu/~csc2542h/fall/material/csc2542f16_dqn.pdf)
 - [OpenAI Baselines: DQN](https://blog.openai.com/openai-baselines-dqn/)
 - [Learning Diverse Skills via Maximum Entropy Deep Reinforcement Learning](http://bair.berkeley.edu/blog/2017/10/06/soft-q-learning/)
@@ -43,7 +66,7 @@ command
 ```
 -->
 
-## Usage example
+### Usage example
 
 TODO: A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
@@ -51,15 +74,15 @@ TODO: A few motivating and useful examples of how your product can be used. Spic
 command
 ```  
 
-## Getting started
+### Getting started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+#### Prerequisites
 TODO: What things you need to install the software and how to install them
 
     dep 1, dep 2, ... TODO
 
-### Installing
+#### Installing
 TODO: A step by step series of examples that tell you have to get a development env running
 
 Install the Python dependencies
@@ -67,7 +90,7 @@ Install the Python dependencies
 pip3 install -r requirements.txt
 ```
 
-### Data
+#### Data
 Load the data into a running MongoDB instance
 ```sh
 mongorestore --drop -d cern_ldb --archive=data-cern/cern_ldb.mongodb.20170309.mki_v0_5.gz --gzip
@@ -78,16 +101,16 @@ The MongoDB dump archive was created as follows:
 mongodump -d cern_ldb --archive=X.gz --gzip
 ```
 
-## Built with
+### Built with
 * [MongoDB](http://mongodb.com) - The database used
 * [scikit-learn](http://scikit-learn.org) - Machine learning in Python
 * ...
 
-## Authors
+### Authors
 
 * **Thiery Deruyterre** - [ThierryDeruyttere](https://github.com/ThierryDeruyttere)
 * **Armin Halilovic** – [arminnh](http://github.com/arminnh/)
 
 
-## License
+### License
 Distributed under the MIT license. See ``LICENSE`` for more information.
