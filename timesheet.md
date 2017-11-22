@@ -14,5 +14,5 @@
 ## Thierry
 * 1h, Searching the web for possible things to do as demo
 * 3h, Getting the virtual environment up and running (not a unity pro...)
-* 30m, Reading paper about [Curious learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/)
+* 30m, Reading info about [Curious learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/)
 * **total + total above**: 15.5
