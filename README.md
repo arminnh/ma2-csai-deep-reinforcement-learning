@@ -1,12 +1,12 @@
 #  Human-level control through deep reinforcement learning
 > Project for the course [Capita Selecta Computer Science: Artificial Intelligence](https://onderwijsaanbod.kuleuven.be/syllabi/e/H05N0AE.htm#activetab=doelstellingen_idm1514848) at KU Leuven
 
-### Plan for presentation
-1. Short intro to reinforcement learning works (5 mins)
-2. Short intro to neural networks and in particular Convolutional neural networks (5 mins)
-3. Explanation of deep reinforcement learning. Discuss how the two previous topics can be combined into one.
-4. Demo
-5. What comes after deep reinforcement learning? Small talk about curiosity learning. [Curious Reinforcment Learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/)
+### Plan for presentation (30 min)
+1. Short intro to reinforcement learning works (2/3 min)
+2. Short intro to neural networks and in particular Convolutional neural networks (2/3 min)
+3. Explanation of deep reinforcement learning. Discuss how the two previous topics can be combined into one. (12 min)
+4. Demo (10 min)
+5. What comes after deep reinforcement learning? Small talk about curiosity learning. [Curious Reinforcment Learning](https://www.quantamagazine.org/clever-machines-learn-how-to-be-curious-20170919/) (2 min)
 
 ### Demo based on project
 Application of deep reinforcement learning for self driving cars in a virtual world.
