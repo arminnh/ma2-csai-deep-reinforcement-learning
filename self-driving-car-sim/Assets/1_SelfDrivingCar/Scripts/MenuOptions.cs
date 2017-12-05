@@ -36,7 +36,7 @@ public class MenuOptions : MonoBehaviour
 		} else if (track == 1) {
             SceneManager.LoadScene("JungleTrackTraining");
 		} else if (track == 2) {
-			SceneManager.LoadScene ("Car");
+			SceneManager.LoadScene ("CarAutonomous");
 		}
 
     }
@@ -48,7 +48,7 @@ public class MenuOptions : MonoBehaviour
 		} else if (track == 1) {
 			SceneManager.LoadScene ("JungleTrackAutonomous");
 		} else if (track == 2) {
-			SceneManager.LoadScene ("Car");
+			SceneManager.LoadScene ("CarAutonomous");
 		}
     }
 

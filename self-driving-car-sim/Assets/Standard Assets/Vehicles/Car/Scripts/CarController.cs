@@ -169,7 +169,7 @@ namespace UnityStandardAssets.Vehicles.Car
 		{
 			RaycastHit hit;
 			if (Physics.Raycast (transform.position, -Vector3.up, out hit, 5)) {
-				if (hit.collider != null && hit.collider.name == "GroundTrack")
+				if (hit.collider != null && hit.collider.tag == "Track")
 					return true;
 			}
 			return false;

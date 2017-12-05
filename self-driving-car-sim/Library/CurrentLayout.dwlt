@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -106,10 +106,10 @@ MonoBehaviour:
     y: 30
     width: 1280
     height: 645
-  m_MinSize: {x: 683, y: 492}
+  m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 48
+  controlID: 650
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,10 +130,10 @@ MonoBehaviour:
     y: 0
     width: 1003
     height: 645
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 49
+  controlID: 544
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,10 +154,10 @@ MonoBehaviour:
     y: 0
     width: 1003
     height: 372
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 50
+  controlID: 545
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -288,14 +288,14 @@ MonoBehaviour:
     width: 750
     height: 351
   m_SceneLighting: 1
-  lastFramingTime: 1331.6267439723015
+  lastFramingTime: 1094.195788025856
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 305.75198, y: 0.0000000026234626, z: -467.82092}
+    m_Target: {x: 375, y: 175.20312, z: 0}
     speed: 2
-    m_Value: {x: 305.75198, y: 0.0000000026234626, z: -467.82092}
+    m_Value: {x: 375, y: 175.20312, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -318,19 +318,19 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.061460704, y: -0.0017838216, z: 0.00010957873, w: 0.99810797}
+    m_Target: {x: -0.11921146, y: 0.8047768, z: -0.17279394, w: -0.55521727}
     speed: 2
-    m_Value: {x: -0.061460707, y: 0.0017838217, z: -0.00010957874, w: -0.998108}
+    m_Value: {x: -0.1192114, y: 0.80477643, z: -0.17279385, w: -0.555217}
   m_Size:
-    m_Target: 7.5214553
+    m_Target: 1433.3082
     speed: 2
-    m_Value: 7.5214553
+    m_Value: 1433.3082
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_LastSceneViewRotation: {x: 0.05996296, y: 0.0042055584, z: -0.00025289893, w: 0.9981918}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -366,26 +366,26 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: b0e2ffff3ee3ffffc8e9ffff7eeeffff82eeffff8ceeffffd8f2ffff34f7ffff3af7ffffa6fbffff00000000
+    m_ExpandedIDs: 1688fdff0089fdffb48afdff168efdffd092fdff8697fdff8a97fdff9697fdffe29bfdff26a0fdff2ca0fdffbeaefdff864afeff9050feffa461feffbc65feffa46ffeff0c78feff5a79fefffc85feff648ffeff7ca2feff94a6feff96cffeff7cd9feff4ca8ffff0cb1ffff40bcffffa0beffffa8c3fffffec8ffffcecdffff00ddffffaee5ffff5cebffff64f3ffffa6fbffff000000005252000070520000c6520000365300007a530000e453000030600000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: CarUI
+      m_OriginalName: CarUI
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -89476
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
   m_ExpandedScenes:
-  - ControlMenu
+  - CarAutonomous
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -529,19 +529,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/1_SelfDrivingCar/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/1_SelfDrivingCar/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/thierryderuyttere/Desktop/Unif_2e_master/capita_selecta/csai-deep-reinforcement-learning/self-driving-car-sim
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 8a290000
-    m_LastClickedID: 10634
-    m_ExpandedIDs: 000000008a290000942900001c2a0000f02b0000142c0000082d0000c22e0000be3000008a31000000ca9a3bffffff7f
+    m_SelectedIDs: ca300000
+    m_LastClickedID: 12490
+    m_ExpandedIDs: 0000000088290000262a00000e2d0000c82e0000c43000003e3100009031000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -557,7 +557,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 10}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -569,7 +569,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008a290000942900001c2a0000f02b0000142c0000082d0000c22e0000be3000008a310000
+    m_ExpandedIDs: 0000000088290000262a00000e2d0000c82e0000c43000003e3100009031000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -596,8 +596,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000382c0000
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c6230000382c0000c02a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
