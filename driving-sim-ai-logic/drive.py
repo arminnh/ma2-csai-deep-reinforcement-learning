@@ -50,6 +50,10 @@ class Steering:
         elif move == Moves.NOTHING:
             pass
 
+    def reset(self):
+        self.H = 0
+        self.V = 0
+
     def getAngle(self):
         return self.H
 
@@ -63,6 +67,8 @@ class SimplePIController:
         self.set_point = 0.
         self.error = 0.
         self.integral = 0.
+
+
 
     def set_desired(self, desired):
         self.set_point = desired
@@ -91,11 +97,16 @@ class SelfDrivingAgent:
 
     def rewardFunction(self, speed, touches_track, time_alive):
         touches = int(touches_track)
-        return touches * ( speed + time_alive * 2) - (1-touches) * 10
+        return touches * ( speed + time_alive * 1.1) - (1-touches) * 10
 
 agent = SelfDrivingAgent()
 sio = socketio.Server()
 app = Flask(__name__)
+
+@sio.on("reset")
+def resetAgent(sid, data):
+    agent.steer.reset()
+    sio.emit('manual', data={}, skip_sid=True)
 
 @sio.on('telemetry')
 def telemetry(sid, data):
@@ -106,6 +117,7 @@ def telemetry(sid, data):
         throttle = ast.literal_eval(data["throttle"])
         # The current speed of the car
         speed = ast.literal_eval(data["speed"])
+        print("Time alive: {}".format(data["time_alive"]))
         time_alive = ast.literal_eval(data["time_alive"])
 
         touches_track = ast.literal_eval(data["touches_track"])

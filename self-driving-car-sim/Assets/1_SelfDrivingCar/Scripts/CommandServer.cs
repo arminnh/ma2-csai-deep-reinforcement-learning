@@ -12,7 +12,7 @@ public class CommandServer : MonoBehaviour
 	public Camera FrontFacingCamera;
 	private SocketIOComponent _socket;
 	private CarController _carController;
-
+	private bool leftGround;
 	// Use this for initialization
 	void Start()
 	{
@@ -21,11 +21,21 @@ public class CommandServer : MonoBehaviour
 		_socket.On("steer", OnSteer);
 		_socket.On("manual", onManual);
 		_carController = CarRemoteControl.GetComponent<CarController>();
+		leftGround = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		
+		if (!this._carController.IsGrounded() && this.leftGround == false) {
+			this.leftGround = true;
+		}
+
+		if (this._carController.IsGrounded() && this.leftGround == true) {
+			_socket.Emit("reset", new JSONObject());
+			this.leftGround = false;
+		}
 	}
 
 	void OnOpen(SocketIOEvent obj)
@@ -68,7 +78,7 @@ public class CommandServer : MonoBehaviour
 				 * Custom
 				 */
 				data["touches_track"] = _carController.touchesTrack.ToString();
-				data["time_alive"] = _carController.timeAlive.ToString("N4");
+				data["time_alive"] = _carController.timeAlive.ToString();
 
 				data["image"] = Convert.ToBase64String(CameraHelper.CaptureFrame(FrontFacingCamera));
 				_socket.Emit("telemetry", new JSONObject(data));
