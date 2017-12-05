@@ -89,9 +89,9 @@ class SelfDrivingAgent:
                         T.ToTensor()])
         self.steer = Steering()
 
-    def rewardFunction(self, speed, touches_track):
+    def rewardFunction(self, speed, touches_track, time_alive):
         touches = int(touches_track)
-        return touches * speed * 10 - (1-touches) * 10
+        return touches * ( speed + time_alive * 2) - (1-touches) * 10
 
 agent = SelfDrivingAgent()
 sio = socketio.Server()
@@ -106,6 +106,8 @@ def telemetry(sid, data):
         throttle = ast.literal_eval(data["throttle"])
         # The current speed of the car
         speed = ast.literal_eval(data["speed"])
+        time_alive = ast.literal_eval(data["time_alive"])
+
         touches_track = ast.literal_eval(data["touches_track"])
         # The current image from the center camera of the car
         imgString = data["image"]
@@ -130,7 +132,7 @@ def telemetry(sid, data):
         throttle = agent.steer.getAcceleration()
 
         # Change args to do something
-        reward = agent.rewardFunction(speed, touches_track)
+        reward = agent.rewardFunction(speed, touches_track, time_alive)
         agent.DQN.remember(agent.state, action, reward, next_state, False)
 
         agent.lastScreen = current_screen

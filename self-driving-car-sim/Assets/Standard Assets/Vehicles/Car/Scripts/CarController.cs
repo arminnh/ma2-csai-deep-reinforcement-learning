@@ -60,6 +60,7 @@ namespace UnityStandardAssets.Vehicles.Car
 		private Vector3 startPos;
 		private Quaternion startRotation;
 		private float startTime = 0;
+		[SerializeField] public int timeAlive = 0;
 
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
@@ -247,11 +248,13 @@ namespace UnityStandardAssets.Vehicles.Car
 			} 
 
 			if (this.startTime != 0 && (Time.time - this.startTime >= this.secondsOfFreedom) ) {
+				// Reset!
 				this.startTime = 0;
 				transform.position = this.startPos;
 				transform.rotation = this.startRotation;
 				Rigidbody rb = GetComponent<Rigidbody> ();
 				rb.velocity = new Vector3 (0, 0, 0);
+				this.timeAlive = 0;
 			}
 
 			//var heading = GameObject.Find("GroundTrackVerges").transform.position - transform.position;
@@ -260,7 +263,7 @@ namespace UnityStandardAssets.Vehicles.Car
 			//Debug.Log ("distance "+ distance);
 			//Debug.Log ("direction "+ direction);
 
-
+			this.timeAlive += 1;
 			/*
 			 * End Custom
 			 */ 

@@ -68,6 +68,7 @@ public class CommandServer : MonoBehaviour
 				 * Custom
 				 */
 				data["touches_track"] = _carController.touchesTrack.ToString();
+				data["time_alive"] = _carController.timeAlive.ToString("N4");
 
 				data["image"] = Convert.ToBase64String(CameraHelper.CaptureFrame(FrontFacingCamera));
 				_socket.Emit("telemetry", new JSONObject(data));
