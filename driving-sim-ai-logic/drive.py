@@ -91,7 +91,6 @@ class SelfDrivingAgent:
 
     def rewardFunction(self, speed, touches_track):
         touches = int(touches_track)
-        print(touches)
         return touches * speed * 10 - (1-touches) * 10
 
 agent = SelfDrivingAgent()
