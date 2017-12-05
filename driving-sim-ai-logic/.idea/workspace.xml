@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="646dc7ce-1aef-4397-bc9e-6ffef957815d" name="Default" comment="Base implementation, still needs a better reward function" />
+    <list default="true" id="646dc7ce-1aef-4397-bc9e-6ffef957815d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +17,8 @@
       <file leaf-file-name="drive.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/drive.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="70" column="35" lean-forward="true" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+            <state relative-caret-position="294">
+              <caret line="145" column="12" lean-forward="true" selection-start-line="145" selection-start-column="12" selection-end-line="145" selection-end-column="12" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -29,7 +29,7 @@
       <file leaf-file-name="TORCH_DQN.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TORCH_DQN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
+            <state relative-caret-position="1113">
               <caret line="120" column="0" lean-forward="true" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
               <folding>
                 <element signature="e#70#99#0" expanded="true" />
@@ -41,7 +41,7 @@
       <file leaf-file-name="TORCH_DQN2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TORCH_DQN2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
+            <state relative-caret-position="-268">
               <caret line="351" column="4" lean-forward="false" selection-start-line="351" selection-start-column="4" selection-end-line="351" selection-end-column="4" />
               <folding>
                 <element signature="e#2097#2107#0" expanded="true" />
@@ -99,7 +99,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="716" />
@@ -238,19 +238,26 @@
       <option name="project" value="LOCAL" />
       <updated>1512475386719</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Can now drive?">
+      <created>1512505518041</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1512505518041</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="716" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="716" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26171243" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32850242" sideWeight="0.503231" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23188406" sideWeight="0.503231" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32850242" sideWeight="0.49676898" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23188406" sideWeight="0.49676898" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33172303" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -277,7 +284,8 @@
     <MESSAGE value="getting ready for pytorch implementation" />
     <MESSAGE value="Copied DQN from https://github.com/keon/deep-q-learning/blob/master/dqn.py&#10;Also trying to port it to torch.&#10;Don't know which one will be easier" />
     <MESSAGE value="Base implementation, still needs a better reward function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Base implementation, still needs a better reward function" />
+    <MESSAGE value="Can now drive?" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can now drive?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -348,7 +356,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TORCH_DQN2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
+        <state relative-caret-position="-268">
           <caret line="351" column="4" lean-forward="false" selection-start-line="351" selection-start-column="4" selection-end-line="351" selection-end-column="4" />
           <folding>
             <element signature="e#2097#2107#0" expanded="true" />
@@ -358,7 +366,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TORCH_DQN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
+        <state relative-caret-position="1113">
           <caret line="120" column="0" lean-forward="true" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
           <folding>
             <element signature="e#70#99#0" expanded="true" />
@@ -368,8 +376,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/drive.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="70" column="35" lean-forward="true" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+        <state relative-caret-position="294">
+          <caret line="145" column="12" lean-forward="true" selection-start-line="145" selection-start-column="12" selection-end-line="145" selection-end-column="12" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

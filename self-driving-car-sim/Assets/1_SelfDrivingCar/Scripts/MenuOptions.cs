@@ -33,24 +33,29 @@ public class MenuOptions : MonoBehaviour
     {
         if (track == 0) {
             SceneManager.LoadScene("LakeTrackTraining");
-        } else {
+		} else if (track == 1) {
             SceneManager.LoadScene("JungleTrackTraining");
-        }
+		} else if (track == 2) {
+			SceneManager.LoadScene ("Car");
+		}
 
     }
 
     public void StartAutonomousMode()
     {
-        if (track == 0) {
-            SceneManager.LoadScene("LakeTrackAutonomous");
-        } else {
-            SceneManager.LoadScene("JungleTrackAutonomous");
-        }
+		if (track == 0) {
+			SceneManager.LoadScene ("LakeTrackAutonomous");
+		} else if (track == 1) {
+			SceneManager.LoadScene ("JungleTrackAutonomous");
+		} else if (track == 2) {
+			SceneManager.LoadScene ("Car");
+		}
     }
 
     public void SetLakeTrack()
     {
         outlines [0].effectColor = new Color (0, 0, 0);
+		outlines [2].effectColor = new Color (255, 255, 255);
         outlines [1].effectColor = new Color (255, 255, 255);
         track = 0;
     }
@@ -60,6 +65,15 @@ public class MenuOptions : MonoBehaviour
         track = 1;
         outlines [1].effectColor = new Color (0, 0, 0);
         outlines [0].effectColor = new Color (255, 255, 255);
+		outlines [2].effectColor = new Color (255, 255, 255);
+
     }
 
+	public void SetTestTrack()
+	{
+		track = 2;
+		outlines [2].effectColor = new Color (0, 0, 0);
+		outlines [0].effectColor = new Color (255, 255, 255);
+		outlines [1].effectColor = new Color (255, 255, 255);
+	}
 }

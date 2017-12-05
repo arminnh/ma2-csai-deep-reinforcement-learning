@@ -19,13 +19,41 @@ import h5py
 # Swap out for pytorch
 #from keras.models import load_model
 #from keras import __version__ as keras_version
-
 class Moves(Enum):
-    LEFT = 1
-    RIGHT = 2
-    ACCELERATE = 3
-    BRAKE = 4
-    NOTHING = 5
+    LEFT = 0
+    RIGHT = 1
+    ACCELERATE = 2
+    BRAKE = 3
+    NOTHING = 4
+
+class Steering:
+    # Based on code found in steering.cs
+
+    def __init__(self):
+        self.H = 0.
+        self.V = 0.
+
+    def update(self, move):
+        if move == Moves.LEFT:
+            if self.H > -1.0:
+                self.H -= 0.05
+        elif move == Moves.RIGHT:
+            if self.H < 1.0:
+                self.H += 0.05
+        elif move == Moves.ACCELERATE:
+            if self.V < 1.0:
+                self.V += 0.05
+        elif move == Moves.BRAKE:
+            if self.V > 0:
+                self.V -= 0.05
+        elif move == Moves.NOTHING:
+            pass
+
+    def getAngle(self):
+        return self.H
+
+    def getAcceleration(self):
+        return self.V
 
 class SimplePIController:
     def __init__(self, Kp, Ki):
@@ -62,6 +90,7 @@ class SelfDrivingAgent:
         self.resize = T.Compose([T.ToPILImage(),
                         T.Scale(40, interpolation=Image.CUBIC),
                         T.ToTensor()])
+        self.steer = Steering()
 
     def rewardFunction(self, speed, touches_track):
         touches = int(touches_track)
@@ -93,6 +122,12 @@ class SelfDrivingAgent:
             #throttle = controller.update(float(speed))
 
             action = self.DQN.act(self.state)
+
+            # Update controller
+            self.steer.update(Moves(action))
+
+            steering_angle = self.steer.getAngle()
+            throttle = self.steer.getAcceleration()
 
             # Change args to do something
             reward = self.rewardFunction(speed, touches_track)

@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\1_SelfDrivingCar\Scripts\CameraHelper.cs" />
-     <Compile Include="Assets\1_SelfDrivingCar\Scripts\CarTouchesTrack.cs" />
      <Compile Include="Assets\1_SelfDrivingCar\Scripts\CommandServer.cs" />
      <Compile Include="Assets\1_SelfDrivingCar\Scripts\LightConditions.cs" />
      <Compile Include="Assets\1_SelfDrivingCar\Scripts\MenuOptions.cs" />

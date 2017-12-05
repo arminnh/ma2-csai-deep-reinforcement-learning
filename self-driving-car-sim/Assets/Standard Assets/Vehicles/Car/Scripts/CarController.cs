@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 
-
 namespace UnityStandardAssets.Vehicles.Car
 {
     internal enum CarDriveType
@@ -51,6 +50,16 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private Camera CenterCamera;
         [SerializeField] private Camera LeftCamera;
         [SerializeField] private Camera RightCamera;
+
+		/*
+		 *  Custom
+		 */
+		[SerializeField] public bool touchesTrack;
+		public bool resetCar = true;
+		public int secondsOfFreedom = 3;
+		private Vector3 startPos;
+		private Quaternion startRotation;
+		private float startTime = 0;
 
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
@@ -146,7 +155,26 @@ namespace UnityStandardAssets.Vehicles.Car
 
             m_Rigidbody = GetComponent<Rigidbody> ();
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl * m_FullTorqueOverAllWheels);
-        }
+        
+
+			/*
+			 * Custom
+			 */ 
+			this.startPos = transform.position;
+			this.startRotation = transform.rotation;
+
+		}
+			
+		public bool IsGrounded()  
+		{
+			RaycastHit hit;
+			if (Physics.Raycast (transform.position, -Vector3.up, out hit, 5)) {
+				if (hit.collider != null && hit.collider.name == "GroundTrack")
+					return true;
+			}
+			return false;
+		}
+
 
         private void GearChanging ()
         {
@@ -205,6 +233,37 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 //Dump();
             }
+
+
+			/*
+			 *  Custom
+			 */ 
+
+			touchesTrack = IsGrounded();
+			if (!touchesTrack && this.resetCar) {
+				if (this.startTime == 0) {
+					this.startTime = Time.time;
+				}
+			} 
+
+			if (this.startTime != 0 && (Time.time - this.startTime >= this.secondsOfFreedom) ) {
+				this.startTime = 0;
+				transform.position = this.startPos;
+				transform.rotation = this.startRotation;
+				Rigidbody rb = GetComponent<Rigidbody> ();
+				rb.velocity = new Vector3 (0, 0, 0);
+			}
+
+			//var heading = GameObject.Find("GroundTrackVerges").transform.position - transform.position;
+			//var distance = heading.magnitude;
+
+			//Debug.Log ("distance "+ distance);
+			//Debug.Log ("direction "+ direction);
+
+
+			/*
+			 * End Custom
+			 */ 
         }
 
         public void Move (float steering, float accel, float footbrake, float handbrake)
