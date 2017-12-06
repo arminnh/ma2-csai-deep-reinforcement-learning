@@ -100,7 +100,7 @@ class SelfDrivingAgent:
         return touches * ( speed * time_alive ) - (1-touches) * 10
 
 agent = SelfDrivingAgent()
-sio = socketio.Server()
+sio = socketio.Server(async_mode='threading', async_handlers=True)
 app = Flask(__name__)
 
 @sio.on("reset")
@@ -112,7 +112,7 @@ def resetAgent(sid, data):
 def telemetry(sid, data):
     if data:
         # The current steering angle of the car
-        steering_angle = ast.literal_eval(data["steering_angle"])
+        old_steering_angle = ast.literal_eval(data["steering_angle"])
         # The current throttle of the car
         throttle = ast.literal_eval(data["throttle"])
         # The current speed of the car
@@ -145,7 +145,7 @@ def telemetry(sid, data):
         # Change args to do something
         reward = agent.rewardFunction(speed, touches_track, time_alive)
         agent.DQN.remember(agent.state, action, reward, next_state, False)
-        print("Time alive: {}, Score: {}".format(data["time_alive"], reward))
+        print("Time alive: {}, Score: {}, Speed: {}".format(data["time_alive"], reward, speed, old_steering_angle))
 
         agent.lastScreen = current_screen
         agent.state = next_state
@@ -219,8 +219,9 @@ if __name__ == '__main__':
         print("NOT RECORDING THIS RUN ...")
 
 
+
     # wrap Flask application with engineio's middleware
     app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
+    eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 4567)), app)
