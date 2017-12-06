@@ -12,6 +12,7 @@ public class UISystem : MonoSingleton<UISystem> {
     public Text MPH_Text;
     public Image MPH_Animation;
     public Text Angle_Text;
+	public Text LifeTime_Text;
     public Text RecordStatus_Text;
 	public Text DriveStatus_Text;
 	public Text SaveStatus_Text;
@@ -33,6 +34,7 @@ public class UISystem : MonoSingleton<UISystem> {
 		RecordStatus_Text.text = "RECORD";
 		DriveStatus_Text.text = "";
 		SaveStatus_Text.text = "";
+		LifeTime_Text.text = "";
 		SetAngleValue(0);
         SetMPHValue(0);
 		if (!isTraining) {
@@ -46,6 +48,11 @@ public class UISystem : MonoSingleton<UISystem> {
     {
         Angle_Text.text = value.ToString("N2") + "°";
     }
+
+	public void SetLifeTimeValue(int value)
+	{
+		LifeTime_Text.text = value.ToString();
+	}
 
     public void SetMPHValue(float value)
     {
@@ -82,6 +89,7 @@ public class UISystem : MonoSingleton<UISystem> {
     {
         SetMPHValue(carController.CurrentSpeed);
         SetAngleValue(carController.CurrentSteerAngle);
+		SetLifeTimeValue (carController.timeAlive);
     }
 
 	// Update is called once per frame

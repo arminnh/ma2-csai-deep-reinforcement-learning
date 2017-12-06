@@ -97,7 +97,7 @@ class SelfDrivingAgent:
 
     def rewardFunction(self, speed, touches_track, time_alive):
         touches = int(touches_track)
-        return touches * ( speed + time_alive * 1.1) - (1-touches) * 10
+        return touches * ( speed * time_alive ) - (1-touches) * 10
 
 agent = SelfDrivingAgent()
 sio = socketio.Server()
@@ -117,7 +117,6 @@ def telemetry(sid, data):
         throttle = ast.literal_eval(data["throttle"])
         # The current speed of the car
         speed = ast.literal_eval(data["speed"])
-        print("Time alive: {}".format(data["time_alive"]))
         time_alive = ast.literal_eval(data["time_alive"])
 
         touches_track = ast.literal_eval(data["touches_track"])
@@ -146,10 +145,11 @@ def telemetry(sid, data):
         # Change args to do something
         reward = agent.rewardFunction(speed, touches_track, time_alive)
         agent.DQN.remember(agent.state, action, reward, next_state, False)
+        print("Time alive: {}, Score: {}".format(data["time_alive"], reward))
 
         agent.lastScreen = current_screen
         agent.state = next_state
-        agent.DQN.replay(64)
+        agent.DQN.replay(128)
 
         # save frame
         if args.image_folder != '':

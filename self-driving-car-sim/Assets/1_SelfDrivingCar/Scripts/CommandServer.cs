@@ -13,6 +13,8 @@ public class CommandServer : MonoBehaviour
 	private SocketIOComponent _socket;
 	private CarController _carController;
 	private bool leftGround;
+	public  int sendDataEachFrames = 6;
+	private int counter = 0;
 	// Use this for initialization
 	void Start()
 	{
@@ -36,6 +38,13 @@ public class CommandServer : MonoBehaviour
 			_socket.Emit("reset", new JSONObject());
 			this.leftGround = false;
 		}
+
+		if (counter % this.sendDataEachFrames == 0) {
+			counter = 0;
+			EmitTelemetry(new SocketIOEvent("send you fool"));
+		}
+
+		counter += 1;
 	}
 
 	void OnOpen(SocketIOEvent obj)
