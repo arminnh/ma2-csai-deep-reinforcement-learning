@@ -11,46 +11,27 @@ from torch import optim
 class DQNNetwork(nn.Module):
     def __init__(self, actions_size):
         super(DQNNetwork, self).__init__()
+        self.conv1 = nn.Conv2d(3, 16, kernel_size=5, stride=2, padding=1)
+        self.bn1 = nn.BatchNorm2d(16)
+        self.conv2 = nn.Conv2d(16, 32, kernel_size=5, stride=2)
+        self.bn2 = nn.BatchNorm2d(32)
+        self.conv3 = nn.Conv2d(32, 32, kernel_size=5, stride=2)
+        self.bn3 = nn.BatchNorm2d(32)
+        self.head = nn.Linear(448, actions_size)
 
-        self.cnn1 = nn.Sequential(
-            nn.ReflectionPad2d(1),
-            nn.Conv2d(1, 4, kernel_size=3),
-            nn.ReLU(inplace=True),
-            nn.BatchNorm2d(4),
-            nn.Dropout2d(p=.2),
+    def forward(self, x):
+        if x.dim() == 3:
+            # Make x 4d
+            x = x[None, :, :, :]
+        x = F.relu(self.bn1(self.conv1(x)))
+        x = F.relu(self.bn2(self.conv2(x)))
+        x = F.relu(self.bn3(self.conv3(x)))
+        return self.head(x.view(x.size(0), -1))
 
-            nn.ReflectionPad2d(1),
-            nn.Conv2d(4, 8, kernel_size=3),
-            nn.ReLU(inplace=True),
-            nn.BatchNorm2d(8),
-            nn.Dropout2d(p=.2),
-
-            nn.ReflectionPad2d(1),
-            nn.Conv2d(8, 8, kernel_size=3),
-            nn.ReLU(inplace=True),
-            nn.BatchNorm2d(8),
-            nn.Dropout2d(p=.2),
-        )
-
-        self.fc1 = nn.Sequential(
-            nn.Linear(8 * 100 * 100, 500),
-            nn.ReLU(inplace=True),
-
-            nn.Linear(500, 500),
-            nn.ReLU(inplace=True),
-
-            nn.Linear(500, actions_size)
-        )
-
-    def forward_once(self, x):
-        output = self.cnn1(x)
-        output = output.view(output.size()[0], -1)
-        output = self.fc1(output)
-        return output
 
 class DQN:
 
-    def __init__(self, action_size, GPU=torch.cuda.is_available()):
+    def __init__(self, action_size, GPU=torch.cuda.is_available(), GPU_id=0):
         self.action_size = action_size
         self.memory = deque(maxlen=2000)
         self.gamma = 0.95    # discount rate
@@ -59,11 +40,11 @@ class DQN:
         self.epsilon_decay = 0.995
         self.learning_rate = 0.001
         self.gpu = GPU
-
+        self.gpu_id = GPU_id
         # Torch
         self.model = DQNNetwork(action_size)
         if GPU:
-            self.model.cuda()
+            self.model.cuda(device_id=GPU_id)
 
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
 
@@ -72,8 +53,8 @@ class DQN:
 
     def fit(self, state, target):
         if self.gpu:
-            state_var = Variable(state).cuda()
-            target_var = Variable(target).cuda()
+            state_var = Variable(state).cuda(device_id=self.gpu_id)
+            target_var = Variable(target).cuda(device_id=self.gpu_id)
         else:
             state_var = Variable(state)
             target_var = Variable(target)
@@ -96,24 +77,46 @@ class DQN:
 
         #act_values = self.model.predict(state)
 
-        return np.argmax(outputs.data[0])  # returns action
+        return np.argmax(outputs.data[0].cpu().numpy())  # returns action
 
     def replay(self, batch_size):
+        # If we don't have enough things in memory just return
+        if len(self.memory) < batch_size:
+            return
+
         minibatch = random.sample(self.memory, batch_size)
         state_batch = []
         target_batch = []
         for state, action, reward, next_state, done in minibatch:
             target = reward
             if not done:
+                if self.gpu:
+                    next_state = Variable(next_state).cuda()
+                else:
+                    next_state = Variable(next_state)
+
+                #print(self.model(next_state))
                 target = (reward + self.gamma *
-                          np.amax(self.model(next_state)[0]))
-            target_f = self.model(state)
+                          np.amax(self.model(next_state)[0].data.cpu().numpy()))
+
+            if self.gpu:
+                state = Variable(state).cuda()
+            else:
+                state = Variable(state)
+
+            target_f = self.model(state).data.cpu()
             target_f[0][action] = target
-            state_batch.append(state)
+            state_batch.append(state.data.cpu())
             target_batch.append(target_f)
 
         # Send it all like a full batch
-        self.fit(torch.stack(state_batch), torch.stack(target_batch))
+        state_batch = torch.stack(state_batch)
+        target_batch = torch.stack(target_batch)
+        #print("state")
+        #print(state_batch)
+        #print("target")
+        #print(target_batch)
+        self.fit(state_batch, target_batch)
 
             #self.model.fit(state, target_f, epochs=1, verbose=0)
         if self.epsilon > self.epsilon_min:
