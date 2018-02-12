@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/SampleScenes/Scripts/CameraSwitch.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_SelfDrivingCar/Scripts/CommandServer.cs">
     <Files>
+      <File FileName="Assets/1_SelfDrivingCar/Scripts/CommandServer.cs" Line="94" Column="6" />
       <File FileName="Assets/1_SelfDrivingCar/Scripts/UISystem.cs" Line="1" Column="1" />
-      <File FileName="Assets/1_SelfDrivingCar/Scripts/CommandServer.cs" Line="59" Column="23" />
       <File FileName="Assets/1_SelfDrivingCar/Scripts/MenuOptions.cs" Line="1" Column="1" />
       <File FileName="Assets/SocketIO/Scripts/SocketIO/SocketIOComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/Standard Assets/Vehicles/Car/Scripts/Steering.cs" Line="1" Column="1" />

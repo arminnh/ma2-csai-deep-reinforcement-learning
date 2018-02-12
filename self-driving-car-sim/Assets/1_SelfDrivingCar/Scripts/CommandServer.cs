@@ -67,6 +67,7 @@ public class CommandServer : MonoBehaviour
 		//    print(float.Parse(jsonObject.GetField("steering_angle").str));
 		CarRemoteControl.SteeringAngle = float.Parse(jsonObject.GetField("steering_angle").str);
 		CarRemoteControl.Acceleration = float.Parse(jsonObject.GetField("throttle").str);
+		Debug.Log ("Pause");
 		EmitTelemetry(obj);
 	}
 
@@ -94,6 +95,9 @@ public class CommandServer : MonoBehaviour
 				data["image"] = Convert.ToBase64String(CameraHelper.CaptureFrame(FrontFacingCamera));
 				_socket.Emit("telemetry", new JSONObject(data));
 			}
+				//Debug.Log ("UnPause");
+
+			//Time.timeScale = 1;
 		});
 
 		//    UnityMainThreadDispatcher.Instance().Enqueue(() =>

@@ -15,11 +15,21 @@ from enum import Enum
 import torchvision.transforms as T
 import ast
 
+parser = argparse.ArgumentParser(description='Remote Driving')
+# parser.add_argument(
+#     'model',
+#     type=str,
+#     help='Path to model h5 file. Model should be on the same path.'
+# )
+parser.add_argument(
+    'gpu',
+    type=int,
+    default=None,
+    help='The gpu this will run on'
+)
+args = parser.parse_args()
 
-import h5py
-# Swap out for pytorch
-#from keras.models import load_model
-#from keras import __version__ as keras_version
+
 class Moves(Enum):
     LEFT = 0
     RIGHT = 1
@@ -68,8 +78,6 @@ class SimplePIController:
         self.error = 0.
         self.integral = 0.
 
-
-
     def set_desired(self, desired):
         self.set_point = desired
 
@@ -83,12 +91,18 @@ class SimplePIController:
         return self.Kp * self.error + self.Ki * self.integral
 
 
+
 class SelfDrivingAgent:
 
     def __init__(self, set_speed = 9):
         self.controller = SimplePIController(0.1, 0.002)
         self.controller.set_desired(set_speed)
-        self.DQN = DQN(len(Moves))
+        if args.gpu is not None:
+            self.DQN = DQN(len(Moves))
+        else:
+            self.DQN = DQN(len(Moves), True, args.gpu)
+
+
         self.state = None
         self.lastScreen = None
         self.resize = T.Compose([T.Scale(40, interpolation=Image.CUBIC),
@@ -99,9 +113,11 @@ class SelfDrivingAgent:
         touches = int(touches_track)
         return touches * ( speed * time_alive ) - (1-touches) * 10
 
+
 agent = SelfDrivingAgent()
-sio = socketio.Server(async_mode='threading', async_handlers=True)
+sio = socketio.Server(async_handlers=True)
 app = Flask(__name__)
+
 
 @sio.on("reset")
 def resetAgent(sid, data):
@@ -151,11 +167,11 @@ def telemetry(sid, data):
         agent.state = next_state
         agent.DQN.replay(128)
 
-        # save frame
-        if args.image_folder != '':
-            timestamp = datetime.utcnow().strftime('%Y_%m_%d_%H_%M_%S_%f')[:-3]
-            image_filename = os.path.join(args.image_folder, timestamp)
-            image.save('{}.jpg'.format(image_filename))
+        # # save frame
+        # if args.image_folder != '':
+        #     timestamp = datetime.utcnow().strftime('%Y_%m_%d_%H_%M_%S_%f')[:-3]
+        #     image_filename = os.path.join(args.image_folder, timestamp)
+        #     image.save('{}.jpg'.format(image_filename))
 
         print(steering_angle, throttle)
         send_control(steering_angle, throttle)
@@ -180,21 +196,6 @@ def send_control(steering_angle, throttle):
         skip_sid=True)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Remote Driving')
-    # parser.add_argument(
-    #     'model',
-    #     type=str,
-    #     help='Path to model h5 file. Model should be on the same path.'
-    # )
-    parser.add_argument(
-        'image_folder',
-        type=str,
-        nargs='?',
-        default='',
-        help='Path to image folder. This is where the images from the run will be saved.'
-    )
-    args = parser.parse_args()
-
     # check that model Keras version is same as local Keras version
     # Swap out for pytorch
     #f = h5py.File(args.model, mode='r')
@@ -207,21 +208,8 @@ if __name__ == '__main__':
     #
     # model = load_model(args.model)
 
-    if args.image_folder != '':
-        print("Creating image folder at {}".format(args.image_folder))
-        if not os.path.exists(args.image_folder):
-            os.makedirs(args.image_folder)
-        else:
-            shutil.rmtree(args.image_folder)
-            os.makedirs(args.image_folder)
-        print("RECORDING THIS RUN ...")
-    else:
-        print("NOT RECORDING THIS RUN ...")
-
-
-
     # wrap Flask application with engineio's middleware
     app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 4567)), app)
+    eventlet.wsgi.server(eventlet.listen(('localhost', 4567)), app)
