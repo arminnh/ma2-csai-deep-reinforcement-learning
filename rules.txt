@@ -1,0 +1,18 @@
+Rules for the contemporary topics in AI part :
+
+*) it should be a new topic for you (not seen in courses, not related to your master thesis); typically equivalent to three -four papers or one book !
+*) you can use material from the web BUT you should provide clear references (to slides / to papers … ) and clearly describe what you have used in your report; no need to tell that you should not simply copy an existing presentation; omitting sources is considered cheating;
+*) it should be a complete story, have a clear message … not just unrelated bits and pieces; you have freedom in selecting your material;
+*) it should contain technical and scientific material, not just the media story;
+*) you should understand the science / technical details (and be able to answer questions) of the papers that your presentation and work is based on;
+*) you should do something original and creative (eg. integrate different sources, use new examples, run experiment, show demo, formulate a possible exam/exercise question, implement a simple program, … );
+*) you should write a short report (3-6p double column) + make the slides available of what you did; not just summarise what the papers are about;
+*) the total time to be spent on this part should be between 50-60 hours (including attending the presentations); keep track of how much time you devote using a tool (or on a paper);
+*) you should attend the presentations of fellow students
+
+Practical issues :
+
+*) You should discuss your plan (i.e., the literature to be studied, the creative idea to be pursued, etc.) with Luc De Raedt (before December 1) and get it approved;*
+*) Some slots for meeting with Luc De Raedt are available on November 22 and 23; see the wiki, please fill out a slot below.
+*) When meeting with Luc De Raedt for the first time, we will also set a date for your presentation;
+*) You should also discuss your presentation/slides with Luc De Raedt at least two weeks before the presentation takes place and you should submit your presentation at least 1 week before the presentation
