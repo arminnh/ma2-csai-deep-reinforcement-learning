@@ -108,10 +108,21 @@ class SelfDrivingAgent:
         self.resize = T.Compose([T.Scale(40, interpolation=Image.CUBIC),
                         T.ToTensor()])
         self.steer = Steering()
+        self.noSpeed = 0
+        self.oldReward = 0
+        self.currentReward = 0
 
-    def rewardFunction(self, speed, touches_track, time_alive):
+    def rewardFunction(self, speed, touches_track, time_alive, steering):
         touches = int(touches_track)
-        return touches * ( speed * time_alive ) - (1-touches) * 10
+        if speed == 0:
+            self.noSpeed += 1
+        else:
+            self.noSpeed = 0
+
+        self.oldReward = self.currentReward
+        val = (touches * int(speed>1) - (1-touches) * 10 - self.noSpeed - int(abs(steering) > 0.5) * 5) * time_alive / 1000
+        self.currentReward = self.oldReward * 0.95 + val
+        return self.currentReward
 
 
 agent = SelfDrivingAgent()
@@ -123,6 +134,33 @@ app = Flask(__name__)
 def resetAgent(sid, data):
     agent.steer.reset()
     sio.emit('manual', data={}, skip_sid=True)
+
+@sio.on("manual")
+def manual(sid, data):
+    # The current steering angle of the car
+    old_steering_angle = ast.literal_eval(data["steering_angle"])
+    # The current throttle of the car
+    throttle = ast.literal_eval(data["throttle"])
+    # The current speed of the car
+    speed = ast.literal_eval(data["speed"])
+    time_alive = ast.literal_eval(data["time_alive"])
+
+    touches_track = ast.literal_eval(data["touches_track"])
+
+    # Change args to do something
+    reward = agent.rewardFunction(speed, touches_track, time_alive, old_steering_angle)
+    print("getting values")
+    send_reward(reward)
+
+
+def send_reward(reward):
+    sio.emit(
+        "reward",
+        data={
+            'reward': reward.__str__(),
+        },
+        skip_sid=True)
+
 
 @sio.on('telemetry')
 def telemetry(sid, data):
@@ -159,7 +197,13 @@ def telemetry(sid, data):
         throttle = agent.steer.getAcceleration()
 
         # Change args to do something
-        reward = agent.rewardFunction(speed, touches_track, time_alive)
+        reward = agent.rewardFunction(speed, touches_track, time_alive, steering_angle)
+        if reward < -100:
+            sio.emit("reset",  data={}, skip_sid=True)
+            agent.oldReward = 0
+            agent.currentReward = 0
+            return
+
         agent.DQN.remember(agent.state, action, reward, next_state, False)
         print("Time alive: {}, Score: {}, Speed: {}".format(data["time_alive"], reward, speed, old_steering_angle))
 
@@ -175,6 +219,8 @@ def telemetry(sid, data):
 
         print(steering_angle, throttle)
         send_control(steering_angle, throttle)
+        send_reward(reward)
+
 
     else:
         # NOTE: DON'T EDIT THIS.

@@ -33,7 +33,7 @@ class DQN:
 
     def __init__(self, action_size, GPU=torch.cuda.is_available(), GPU_id=0):
         self.action_size = action_size
-        self.memory = deque(maxlen=2000)
+        self.memory = deque(maxlen=20000)
         self.gamma = 0.95    # discount rate
         self.epsilon = 1.0  # exploration rate
         self.epsilon_min = 0.01
@@ -42,9 +42,9 @@ class DQN:
         self.gpu = GPU
         self.gpu_id = GPU_id
         # Torch
-        self.model = DQNNetwork(action_size)
-        if GPU:
-            self.model.cuda(device_id=GPU_id)
+        self.model = DQNNetwork(action_size).cuda(GPU_id)
+        #if GPU:
+        #    self.model = self.model.cuda(device=GPU_id)
 
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
 
@@ -53,8 +53,8 @@ class DQN:
 
     def fit(self, state, target):
         if self.gpu:
-            state_var = Variable(state).cuda(device_id=self.gpu_id)
-            target_var = Variable(target).cuda(device_id=self.gpu_id)
+            state_var = Variable(state).cuda(device=self.gpu_id)
+            target_var = Variable(target).cuda(device=self.gpu_id)
         else:
             state_var = Variable(state)
             target_var = Variable(target)
@@ -72,7 +72,7 @@ class DQN:
             # Do random action
             return random.randrange(self.action_size)
 
-        outputs = self.model(Variable(state))
+        outputs = self.model(Variable(state).cuda(self.gpu_id))
         #_, predicted = torch.max(outputs.data, 1)
 
         #act_values = self.model.predict(state)
