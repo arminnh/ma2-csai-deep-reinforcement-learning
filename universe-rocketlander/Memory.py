@@ -35,19 +35,14 @@ class ReplayMemory(object):
     def _modify_screen(self,frame):
         screen = frame.transpose((2, 0, 1))
 
-        # convert to grayscale
-
-        def rgb2gray(rgb):
-            #https://stackoverflow.com/questions/12201577/how-can-i-convert-an-rgb-image-into-grayscale-in-python
-            r, g, b = rgb[:, :, 0], rgb[:, :, 1], rgb[:, :, 2]
-            return 0.2989 * r + 0.5870 * g + 0.1140 * b
-
         screen = np.ascontiguousarray(screen, dtype=np.float32) / 255
         screen = torch.from_numpy(screen)
         # Resize
         return self.resize(screen)
 
     def store_frame(self, frame):
+        if frame is [None]:
+            print("oops")
         frame = self._modify_screen(frame)
 
         if len(self.states) == 0:
@@ -78,8 +73,11 @@ class ReplayMemory(object):
         for ids in selected_idxs:
             current_states.append(np.expand_dims(self.get_recent_history(ids),0))
             next_states.append(np.expand_dims(self.get_recent_history(ids+1),0))
-
-        current_states = np.concatenate(current_states, 0)
+        try:
+            current_states = np.concatenate(current_states, 0)
+        except Exception as ex:
+            print(current_states)
+            exit(0)
         next_states = np.concatenate(next_states, 0)
 
         return current_states, actions, rewards, next_states, done
@@ -87,12 +85,20 @@ class ReplayMemory(object):
     def __len__(self):
         return self.current_frames
 
+
+    def _dist(self, start, end):
+        j = 0
+        while (start + j) % self.capacity != (end-1):
+            j += 1
+        return j
+
     def get_recent_history(self, position=None):
         # get the last frame hist length frames
         # to give it to the network
-        if position == None:
+        if position is None:
             position = self.position
 
+        position += 1
         start_hist = position - self.frame_hist_length
 
         if len(self) == self.capacity and start_hist < 0:
@@ -112,8 +118,11 @@ class ReplayMemory(object):
 
         start_hist = (new_start % self.capacity)
         # How many frames have we left?
-        missing = self.frame_hist_length - (position - start_hist)
-
+        if start_hist > position:
+            missing = self.frame_hist_length - ((self.capacity + position) - start_hist)
+        else:
+            missing = self.frame_hist_length - (position - start_hist)
+        #print(missing)
 
         frames = []
 
