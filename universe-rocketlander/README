@@ -1,0 +1,4 @@
+This implementation is based on the paper:
+
+and some idea's from:
+https://github.com/transedward/pytorch-dqn
