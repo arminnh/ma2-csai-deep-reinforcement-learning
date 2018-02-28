@@ -22,7 +22,8 @@
 * 3h, 24/02/2018: creating slides
 * 1h, 25/02/2018: editing slides
 * 2h, 27/02/2018: editing slides
-* **total + total above**: 65.5
+* 5h, 28/02/2018 - 21/03/2018: Attend presentations of fellow students (10*30min)
+* **total + total above**: 70.5
 
 ## Armin
 * 2h, +- 01/11/2017: read given paper
@@ -33,5 +34,7 @@
 * 3h, 15/02/2018: Research alternative demo & extra papers on deep reinforcement learning
 * 6h, 16/02/2018 - 23/02/2018: Try out code for alternative demo (openai gym/universe)
 * 3h, 27/02/2018: Presentation
+* 1h, 28/02/2018: Rewrote readme for different aspects of the project. Fixed references. Removed unnecessary files.
+* 5h, 28/02/2018 - 21/03/2018: Attend presentations of fellow students (10*30min)
 TODO: read more on deep reinforcement learning, prepare for presentation
-* **total + total of both**: 23.5
+* **total + total of both**: 29.5
