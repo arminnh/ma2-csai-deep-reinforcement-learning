@@ -11,23 +11,23 @@ from torch import optim
 class DQNNetwork(nn.Module):
     def __init__(self, actions_size):
         super(DQNNetwork, self).__init__()
-        self.conv1 = nn.Conv2d(3, 16, kernel_size=5, stride=2, padding=1)
+        self.conv1 = nn.Conv2d(1, 16, kernel_size=5, stride=2, padding=1)
         self.bn1 = nn.BatchNorm2d(16)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=5, stride=2)
         self.bn2 = nn.BatchNorm2d(32)
         self.conv3 = nn.Conv2d(32, 32, kernel_size=5, stride=2)
         self.bn3 = nn.BatchNorm2d(32)
-        self.head = nn.Linear(448, actions_size)
+        self.head = nn.Linear(9152, actions_size)
 
     def forward(self, x):
         if x.dim() == 3:
             # Make x 4d
+            #x =xx  x.resize(1,128,200)
             x = x[None, :, :, :]
         x = F.relu(self.bn1(self.conv1(x)))
         x = F.relu(self.bn2(self.conv2(x)))
         x = F.relu(self.bn3(self.conv3(x)))
         return self.head(x.view(x.size(0), -1))
-
 
 class DQN:
 
@@ -49,7 +49,7 @@ class DQN:
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
 
     def remember(self, state, action, reward, next_state, done):
-        self.memory.append((state, action, reward, next_state, done))
+        self.memory.append((torch.from_numpy(state), action, reward, torch.from_numpy(next_state), done))
 
     def fit(self, state, target):
         if self.gpu:
@@ -72,7 +72,7 @@ class DQN:
             # Do random action
             return random.randrange(self.action_size)
 
-        outputs = self.model(Variable(state).cuda(self.gpu_id))
+        outputs = self.model(Variable(torch.from_numpy(state)).cuda(self.gpu_id))
         #_, predicted = torch.max(outputs.data, 1)
 
         #act_values = self.model.predict(state)
@@ -130,7 +130,7 @@ class DQN:
 
     def save(self, name):
         state = {
-            'state_dict': self.model.net.state_dict(),
+            'state_dict': self.model.state_dict(),
             'optimizer': self.optimizer.state_dict(),
         }
         torch.save(state, name)

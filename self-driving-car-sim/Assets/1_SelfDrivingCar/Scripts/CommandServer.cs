@@ -13,15 +13,17 @@ public class CommandServer : MonoBehaviour
 	private SocketIOComponent _socket;
 	private CarController _carController;
 	private bool leftGround;
-	public  int sendDataEachFrames = 30;
-	private int counter = 0;
+	//public  int sendDataEachFrames = 30;
+	//private int counter = 0;
 	// Use this for initialization
 	void Start()
 	{
 		_socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 		_socket.On("open", OnOpen);
 		_socket.On("steer", OnSteer);
+		_socket.On("reward", OnReward);
 		_socket.On("manual", onManual);
+		_socket.On ("reset", resetWorld);
 		_carController = CarRemoteControl.GetComponent<CarController>();
 		leftGround = false;
 	}
@@ -47,6 +49,17 @@ public class CommandServer : MonoBehaviour
 
 		counter += 1;
 		*/
+	}
+
+	void OnReward(SocketIOEvent obj){
+		JSONObject jsonObject = obj.data;
+		//    print(float.Parse(jsonObject.GetField("steering_angle").str));
+		CarRemoteControl.Score = float.Parse(jsonObject.GetField("reward").str);
+		EmitTelemetry(obj);
+	}
+
+	void resetWorld(SocketIOEvent obj){
+		_carController.ResetCar ();
 	}
 
 	void OnOpen(SocketIOEvent obj)
@@ -75,24 +88,24 @@ public class CommandServer : MonoBehaviour
 	{
 		UnityMainThreadDispatcher.Instance().Enqueue(() =>
 		{
-			print("Attempting to Send...");
-			// send only if it's not being manually driven
+			//print("Attempting to Send...");
+			// Collect Data from the Car
+			Dictionary<string, string> data = new Dictionary<string, string>();
+			data["steering_angle"] = _carController.CurrentSteerAngle.ToString("N4");
+			data["throttle"] = _carController.AccelInput.ToString("N4");
+			data["speed"] = _carController.CurrentSpeed.ToString("N4");
+			
+			/*
+			 * Custom
+			 */
+			data["touches_track"] = _carController.touchesTrack.ToString();
+			data["time_alive"] = _carController.timeAlive.ToString();
+			
 			if ((Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.S))) {
-				_socket.Emit("telemetry", new JSONObject());
-			}
-			else {
-				// Collect Data from the Car
-				Dictionary<string, string> data = new Dictionary<string, string>();
-				data["steering_angle"] = _carController.CurrentSteerAngle.ToString("N4");
-				data["throttle"] = _carController.AccelInput.ToString("N4");
-				data["speed"] = _carController.CurrentSpeed.ToString("N4");
-				/*
-				 * Custom
-				 */
-				data["touches_track"] = _carController.touchesTrack.ToString();
-				data["time_alive"] = _carController.timeAlive.ToString();
-
+				_socket.Emit("manual", new JSONObject(data));
+			}else {
 				data["image"] = Convert.ToBase64String(CameraHelper.CaptureFrame(FrontFacingCamera));
+
 				_socket.Emit("telemetry", new JSONObject(data));
 			}
 				//Debug.Log ("UnPause");

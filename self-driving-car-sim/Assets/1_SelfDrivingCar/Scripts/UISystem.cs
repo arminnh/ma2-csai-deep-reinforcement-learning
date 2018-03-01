@@ -16,6 +16,7 @@ public class UISystem : MonoSingleton<UISystem> {
     public Text RecordStatus_Text;
 	public Text DriveStatus_Text;
 	public Text SaveStatus_Text;
+	public Text Score_Text;
     public GameObject RecordingPause; 
 	public GameObject RecordDisabled;
 	public bool isTraining = false;
@@ -23,6 +24,9 @@ public class UISystem : MonoSingleton<UISystem> {
     private bool recording;
     private float topSpeed;
 	private bool saveRecording;
+
+	private float oldValue;
+	private float currentValue;
 
 
     // Use this for initialization
@@ -35,8 +39,11 @@ public class UISystem : MonoSingleton<UISystem> {
 		DriveStatus_Text.text = "";
 		SaveStatus_Text.text = "";
 		LifeTime_Text.text = "";
+		Score_Text.text = "";
 		SetAngleValue(0);
         SetMPHValue(0);
+		currentValue = 0;
+		oldValue = 0;
 		if (!isTraining) {
 			DriveStatus_Text.text = "Mode: Autonomous";
 			RecordDisabled.SetActive (true);
@@ -84,18 +91,22 @@ public class UISystem : MonoSingleton<UISystem> {
 			carController.IsRecording = false;
         }
     }
+
+	void SetScoreValue(){
+		Score_Text.text = carController.score.ToString ();
+	}
 	
     void UpdateCarValues()
     {
         SetMPHValue(carController.CurrentSpeed);
         SetAngleValue(carController.CurrentSteerAngle);
-		SetLifeTimeValue (carController.timeAlive);
+		SetLifeTimeValue(carController.timeAlive);
+		SetScoreValue();
     }
 
 	// Update is called once per frame
 	void Update () {
-
-        // Easier than pressing the actual button :-)
+	    // Easier than pressing the actual button :-)
         // Should make recording training data more pleasant.
 
 		if (carController.getSaveStatus ()) {

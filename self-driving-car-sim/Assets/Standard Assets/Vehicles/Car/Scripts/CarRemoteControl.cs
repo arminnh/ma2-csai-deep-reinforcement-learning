@@ -11,6 +11,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         public float SteeringAngle { get; set; }
         public float Acceleration { get; set; }
+		public float Score { get; set; }
         private Steering s;
 
         private void Awake()
@@ -24,14 +25,13 @@ namespace UnityStandardAssets.Vehicles.Car
         private void FixedUpdate()
         {
             // If holding down W or S control the car manually
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-            {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)){
                 s.UpdateValues();
                 m_Car.Move(s.H, s.V, s.V, 0f);
-            } else
-            {
+            }else{
 				m_Car.Move(SteeringAngle, Acceleration, Acceleration, 0f);
             }
+			m_Car.score = Score;
         }
     }
 }
