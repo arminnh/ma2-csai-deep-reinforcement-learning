@@ -12,7 +12,6 @@ from torch.autograd import Variable
 import torchvision.transforms as T
 from PIL import Image
 import torch
-
 # if gpu is to be used
 use_cuda = torch.cuda.is_available()
 torch.cuda.set_device(1)
@@ -67,6 +66,8 @@ class GameEnv:
         self.am_param_updates = 0
         self.episodes = config["episodes"]
         self.final_expl_frame = config["final_expl_frame"]
+        self.mse_loss = torch.nn.MSELoss()
+
 
     def select_action(self, state,loop_count):
         sample = random.random()
@@ -85,6 +86,7 @@ class GameEnv:
             return LongTensor([[random.randrange(self.env.action_space.n)]])
 
     def train_model(self):
+        # code from http://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
         if len(self.memory) < self.batch_size:
             return
 
@@ -120,11 +122,9 @@ class GameEnv:
         # requires_grad=False
         next_state_values.volatile = False
         # Compute the expected Q values
-        expected_state_action_values = reward_batch + (self.gamma * next_state_values)
+        q_expected = reward_batch + (self.gamma * next_state_values)
 
-        # Compute Huber loss
-        loss = torch.nn.MSELoss()
-        output = loss(current_state_action_values, expected_state_action_values.view(-1,1))
+        output = self.mse_loss(current_state_action_values, q_expected.view(-1,1))
         output.clamp(-1,1)
 
         # Clear previous gradients before backward pass
@@ -149,13 +149,14 @@ class GameEnv:
 
             cum_reward = 0.0
             for t in count():
+                #self.env.render()
                 # get current screen and store in memory
                 last_screen_idx = self.memory.store_frame(obs)
-                if t % self.k_th_frame == 0: 
-                        # every k'th frame take new action
-                        last_states = self.memory.get_recent_history(last_screen_idx)
-                        action = self.select_action(last_states, loops_count)
-                        actions_selected += 1
+                #if t % self.k_th_frame == 0:
+                # every k'th frame take new action
+                last_states = self.memory.get_recent_history(last_screen_idx)
+                action = self.select_action(last_states, loops_count)
+                actions_selected += 1
 
                 obs, reward, done, _ = self.env.step(action[0,0])
 

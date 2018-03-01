@@ -98,7 +98,7 @@ class ReplayMemory(object):
         if position is None:
             position = self.position
 
-        position += 1
+        #position += 1
         start_hist = position - self.frame_hist_length
 
         if len(self) == self.capacity and start_hist < 0:
