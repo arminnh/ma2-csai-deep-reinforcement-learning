@@ -36,7 +36,7 @@ class ExperienceMemory:
 
 # The code from Atari_wrappers has been copied from
 # https://github.com/openai/baselines/blob/edb52c22a5e14324304a491edc0f91b6cc07453b/baselines/common/atari_wrappers.pypy
-from notebook.Atari_wrappers import WarpFrame, FrameStack, ClipRewardEnv
+from Atari_wrappers import WarpFrame, FrameStack, ClipRewardEnv
 import gym
 
 
