@@ -107,7 +107,6 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 - [A solution for Udacity's Self-Driving Car project](https://github.com/alexhagiopol/end-to-end-deep-learning)
 - [Self-Driving Truck in Euro Truck Simulator 2, trained via Reinforcement Learning](https://github.com/aleju/self-driving-truck)
 - [Competitive Self-Play](https://blog.openai.com/competitive-self-play/)
-- [The Self Learning Quant](https://hackernoon.com/the-self-learning-quant-d3329fcc9915)
 - [Stock market environment using OpenGym with Deep Q-learning and Policy Gradient](https://github.com/kh-kim/stock_market_reinforcement_learning)
 - [End to End Learning for Self-Driving Cars](https://arxiv.org/abs/1604.07316)
 - [ConvNetJS Deep Q Learning Demo](http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html)
