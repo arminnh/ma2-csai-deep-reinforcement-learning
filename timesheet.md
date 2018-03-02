@@ -18,11 +18,11 @@
 * 4h, 20/02/2018: DQN still not learning?
 * 3h, 21/02/2018: Found small bugs but DQN still not learning
 * 4h, 22/02/2018: Looking at other implementation online to check where the problem lies
-* 2h, 23/02/2018: Over 50h already, just going to use the implementation found online...
 * 3h, 24/02/2018: creating slides
 * 1h, 25/02/2018: editing slides
 * 2h, 27/02/2018: editing slides
 * 2h, 28/02/2018: Attend presentations of fellow students
+* 2h, 1/01/2018: Just started new with the implementation, magically fixed all problems
 * 2h, 15/03/2018: Give presentation + Attend presentations of fellow students
 * 2.5h, 21/03/2018: Attend presentations of fellow students
 * **total**: 68
