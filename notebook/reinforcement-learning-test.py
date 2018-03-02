@@ -29,6 +29,8 @@ Q = np.zeros([env.observation_space.n, env.action_space.n])
 
 # learning rate
 alpha = 0.7
+# discount factor
+gamma = 0.9
 episodes = 1000
 
 # basic Q learning algorithm
@@ -45,7 +47,7 @@ for episode in range(episodes):
         # Take the action and observe the results
         state2, reward, done, info = env.step(action)
         # Update the (state, action) pairin the Q table (Bellman equation)
-        Q[state, action] += alpha * (reward + np.max(Q[state2]) - Q[state,action])
+        Q[state, action] = (1-alpha) * Q[state, action] + alpha * (reward + gamma* np.max(Q[state2]))
 
         R += reward
         state = state2
@@ -53,4 +55,9 @@ for episode in range(episodes):
     if (episode+1) % 25 == 0:
         print("Episode:", episode+1, "\tReward:", R)
 
-env.render()
+# Do a run of the game after learning the Q-values
+done = False
+state = env.reset()
+while not done:
+    state, reward, done, info = env.step(np.argmax(Q[state]))
+    env.render()
