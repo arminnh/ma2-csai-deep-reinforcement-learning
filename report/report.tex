@@ -1,4 +1,4 @@
-\documentclass{report}
+\documentclass[twocolumn]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{titlesec}
@@ -83,35 +83,10 @@
 \end{titlepage}
 
 \newpage
-\tableofcontents
-\newpage
-
-\mychapter{0}{Introduction}
-In this report we discuss our solutions and results for the given tasks. We ran experiments for each task to evaluate our solutions. Unless stated otherwise, the experiments were executed with a certain set of parameters and functions. This was done so that we would have a consistent basis to compare results on. The parameters were also chosen in order to leave enough room for improvement so that the effects of different methods can be compared, while at the same time reducing variation of experiments that are too short or do too little work. The default parameters and functions are as follows:
-\begin{itemize}
-	\item \texttt{number of individuals} = 100
-	\item \texttt{maximum number of generations} = 250
-	\item \texttt{probability of mutation} = 0.05
-	\item \texttt{probability of crossover} = 0.95
-	\item \texttt{percentage of elite population} = 0.05
-	\item \texttt{subpopulations} = 1
-	\item \texttt{loop detection} = off
-	\item \texttt{parent selection function} = sus
-	\item \texttt{crossover function} = cross\_alternating\_edges
-	\item \texttt{mutation function} = mut\_inversion
-	\item \texttt{custom stopping criterion} = on
-	\item \texttt{custom survivor selection function} = off
-\end{itemize}
-The results shown in all tables except for the benchmarks of task 6 are the average results of 10 runs. Every experiment is ran 10 times so that the effects of local optima would be reduced.
-
-The appendix includes extra tables that contain results of experiments and our code that is relevant to the tasks.
-
-\newpage
-\mychapter{0}{Conclusion}
+\section{Introduction}
+Write here your introduction
+\section{Actual work}
+\section{Conclusion}
 
 For this project, we did stuff. Especially thierry
-
-\mychapter{4}{Appendix}
-\section{Tables}
-
 \end{document}
