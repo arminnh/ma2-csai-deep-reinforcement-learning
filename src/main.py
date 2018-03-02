@@ -1,11 +1,29 @@
-from collections import deque
+import gym
 import random
+import numpy as np
+from itertools import count
+from collections import deque
+
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torch.nn.functional as F
+from torch.autograd import Variable
+
+from atari_wrappers import WarpFrame, FrameStack, ClipRewardEnv
 
 
+use_cuda = torch.cuda.is_available()
+FloatTensor = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
+LongTensor = torch.cuda.LongTensor if use_cuda else torch.LongTensor
+ByteTensor = torch.cuda.ByteTensor if use_cuda else torch.ByteTensor
+Tensor = FloatTensor
+
+
+# Experience replay memory
 class ExperienceMemory:
-
-    def __init__(self, N):
-        self.memory = deque(maxlen=N)
+    def __init__(self, n):
+        self.memory = deque(maxlen=n)
 
     def add_transition(self, s, a, r, next_s, done):
         self.memory.append((s, a, r, next_s, done))
@@ -34,14 +52,8 @@ class ExperienceMemory:
             next_state_batch), np.asarray(done_batch)
 
 
-# The code from Atari_wrappers has been copied from
-# https://github.com/openai/baselines/blob/edb52c22a5e14324304a491edc0f91b6cc07453b/baselines/common/atari_wrappers.pypy
-from Atari_wrappers import WarpFrame, FrameStack, ClipRewardEnv
-import gym
-
-
-# custom
-def nature_paper_env(env_id, m=4):
+# Environment according to deepmind's paper "Human Level Control Through Deep Reinforcement Learning"
+def deepmind_env(env_id, m=4):
     env = gym.make(env_id)
 
     # Wrap the frames to 84x84 and grayscale
@@ -55,11 +67,9 @@ def nature_paper_env(env_id, m=4):
 
     return env
 
-import torch.nn as nn
-import torch.nn.functional as F
 
+# The neural network
 class Model(nn.Module):
-
     def __init__(self, possible_actions):
         super().__init__()
         self.conv1 = nn.Conv2d(4, 32, kernel_size=8, stride=4)
@@ -75,26 +85,11 @@ class Model(nn.Module):
         x = F.relu(self.fc1(x.view(x.size(0), -1)))
         return self.fc2(x)
 
-import torch
-
-use_cuda = torch.cuda.is_available()
-FloatTensor = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
-LongTensor = torch.cuda.LongTensor if use_cuda else torch.LongTensor
-ByteTensor = torch.cuda.ByteTensor if use_cuda else torch.ByteTensor
-Tensor = FloatTensor
-
-from itertools import count
-import random
-from torch.autograd import Variable
-import torch
-import numpy as np
-import torch.optim as optim
-
 
 class Agent:
-
     def __init__(self, game_id):
-        self.env = nature_paper_env(game_id)
+        # initialize the game environment
+        self.env = deepmind_env(game_id)
 
         # Init Q
         self.Q = Model(self.env.action_space.n)
@@ -140,7 +135,6 @@ class Agent:
             return LongTensor([[random.randrange(self.env.action_space.n)]])
 
     def get_yi(self, next_states, rewards, done):
-
         q_target_vals = self.target_Q(Variable(torch.from_numpy(next_states)).type(FloatTensor))
 
         # We get a batch size x 1 tensor back
@@ -177,7 +171,7 @@ class Agent:
         loss.backward()
         self.optimizer.step()
 
-    def train(self, episodes, sync_target=10000, max_eploration=10 ** 5, end_eps=0.1, start_eps=1, batch_size=32):
+    def train(self, episodes, sync_target=10000, max_eploration=10**5, end_eps=0.1, start_eps=1, batch_size=32):
         steps = 0
         for episode in range(1, episodes + 1):
             state = self.env.reset()
@@ -187,7 +181,7 @@ class Agent:
                 # select action with prob eps
                 current_eps = self.get_eps(steps, max_eploration, start_eps, end_eps)
                 action = self.get_action(current_eps, state)
-                # execture action in emulator
+                # execute action in emulator
                 next_state, reward, done, _ = self.env.step(action)
                 # Add this to our memory
                 self.memory.add_transition(state, action, reward, next_state, done)
@@ -214,7 +208,6 @@ class Agent:
                 print("Eps: {}".format(current_eps))
 
 
-
-
-agent = Agent("PongDeterministic-v4")
-agent.train(1000)
+if __name__ == '__main__':
+    agent = Agent("PongDeterministic-v4")
+    agent.train(1000)

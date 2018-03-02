@@ -31,14 +31,15 @@
 * 2h, +- 01/11/2017: read given paper
 * 3h, +- 01/11/2017: research topic possibilities
 * 1h, 21/11/2017: set up plan for presentation and demo
-* 2.5h, 02/11/2017: MIT 5 online lectures on deep reinforcement learning [(MIT 6.S094)](https://www.youtube.com/watch?v=1L0TKZQcUtA) 
-* 3h, 15/11/2017: [Deeptraffic.js](https://selfdrivingcars.mit.edu/deeptrafficjs/) tutorial to get some hands-on experience with deep reinforcement learning. 
+* 2.5h, 02/11/2017: MIT 5 online lectures on deep reinforcement learning [(MIT 6.S094)](https://www.youtube.com/watch?v=1L0TKZQcUtA)
+* 3h, 15/11/2017: [Deeptraffic.js](https://selfdrivingcars.mit.edu/deeptrafficjs/) tutorial to get some hands-on experience with deep reinforcement learning.
 * 3h, 15/02/2018: Research alternative demo & extra papers on deep reinforcement learning
 * 6h, 16/02/2018 - 23/02/2018: Try out code for alternative demo (openai gym/universe)
 * 3h, 27/02/2018: Presentation
 * 1h, 28/02/2018: Rewrote readme for different aspects of the project. Fixed references. Removed unnecessary files.
 * 2h, 28/02/2018: Attend presentations of fellow students
+* 3.5h, 02/03/2018: Added basic reinforcement learning algorithm. Updated slides, project structure, some code, readme, report template. Research for DRL papers
 TODO: read more on deep reinforcement learning, prepare for presentation
 * 2h, 15/03/2018: Give presentation + Attend presentations of fellow students
 * 2.5h, 21/03/2018: Attend presentations of fellow students
-* **total**: 31
+* **total**: 34.5
