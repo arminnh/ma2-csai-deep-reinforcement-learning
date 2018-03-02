@@ -1,0 +1,117 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage[tmargin=2.0cm, lmargin=4cm, rmargin=4cm]{geometry}
+\usepackage{listings}             % Include the listings-package
+\usepackage{textcomp}
+\usepackage{listings}
+%\usepackage{minted}      % (requires -shell-escape)
+\usepackage{xcolor}
+\usepackage{filecontents}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{subfig}
+\usepackage{booktabs}
+\usepackage{float}
+
+\newcolumntype{L}{>{\centering\arraybackslash}m{3cm}}
+
+% global settings
+\lstset
+{
+  captionpos = below,
+  frame      = single,
+  breaklines          = true,
+  %postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+  columns    = fullflexible,
+  basicstyle = \ttfamily,
+}
+
+
+%\titlespacing*{\chapter}{0pt}{-19pt}{18pt}
+
+\newcommand{\mychapter}[2]{
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \chapter*{#2}
+    \addcontentsline{toc}{chapter}{#2}
+}
+% \topskip 50pt
+%\titlespacing*{\mychapter}{0cm}{-50pt}{0pt}[0pt]
+
+\begin{document}
+
+\begin{titlepage}
+	\newpage
+	\thispagestyle{empty}
+	\frenchspacing
+	\hspace{-0.2cm}
+	\includegraphics[height=3.4cm]{sedes}
+	\hspace{0.2cm}
+	\rule{0.5pt}{3.4cm}
+	\hspace{0.2cm}
+	\begin{minipage}[b]{8cm}
+		\Large{Katholieke\newline Universiteit\newline Leuven}\smallskip\newline
+		\large{}\smallskip\newline
+		\textbf{Department of\newline Computer Science}\smallskip
+	\end{minipage}
+	\hspace{\stretch{1}}
+	\vspace*{3.2cm}\vfill
+	\begin{center}
+		\begin{minipage}[t]{\textwidth}
+			\begin{center}
+				\LARGE{\rm{\textbf{\uppercase{Capita Selecta:\\Artificial Intelligence}}}}\\
+				\Large{\rm{Human-level control through deep reinforcement learning}}\\
+				\vspace{0.5cm}
+
+			    \large{\textsc{Deruyttere-Halilovic}}%
+
+			\end{center}
+		\end{minipage}
+	\end{center}
+	\vfill
+	\hfill\makebox[8.5cm][l]{%
+		\vbox to 7cm{\vfill\noindent
+				{\rm \textbf{Thierry Deruyttere (r0660485)}}\\
+				{\rm \textbf{Armin Halilovic (r0679689)}}\\[2mm]
+				{\rm Academic year 2017-2018}
+
+		}
+	}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\mychapter{0}{Introduction}
+In this report we discuss our solutions and results for the given tasks. We ran experiments for each task to evaluate our solutions. Unless stated otherwise, the experiments were executed with a certain set of parameters and functions. This was done so that we would have a consistent basis to compare results on. The parameters were also chosen in order to leave enough room for improvement so that the effects of different methods can be compared, while at the same time reducing variation of experiments that are too short or do too little work. The default parameters and functions are as follows:
+\begin{itemize}
+	\item \texttt{number of individuals} = 100
+	\item \texttt{maximum number of generations} = 250
+	\item \texttt{probability of mutation} = 0.05
+	\item \texttt{probability of crossover} = 0.95
+	\item \texttt{percentage of elite population} = 0.05
+	\item \texttt{subpopulations} = 1
+	\item \texttt{loop detection} = off
+	\item \texttt{parent selection function} = sus
+	\item \texttt{crossover function} = cross\_alternating\_edges
+	\item \texttt{mutation function} = mut\_inversion
+	\item \texttt{custom stopping criterion} = on
+	\item \texttt{custom survivor selection function} = off
+\end{itemize}
+The results shown in all tables except for the benchmarks of task 6 are the average results of 10 runs. Every experiment is ran 10 times so that the effects of local optima would be reduced.
+
+The appendix includes extra tables that contain results of experiments and our code that is relevant to the tasks.
+
+\newpage
+\mychapter{0}{Conclusion}
+
+For this project, we did stuff. Especially thierry
+
+\mychapter{4}{Appendix}
+\section{Tables}
+
+\end{document}
