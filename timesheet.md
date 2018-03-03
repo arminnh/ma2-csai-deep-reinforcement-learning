@@ -39,7 +39,10 @@
 * 1h, 28/02/2018: Rewrote readme for different aspects of the project. Fixed references. Removed unnecessary files.
 * 2h, 28/02/2018: Attend presentations of fellow students
 * 3.5h, 02/03/2018: Added basic reinforcement learning algorithm. Updated slides, project structure, some code, readme, report template. Research for DRL papers
-TODO: read more on deep reinforcement learning, prepare for presentation
+* 3h, 03/03/2018: Updated and reordered slides about DRL, added sources and rewrote references slide. Updated main.py load/save/play functions
+* 6h, 03/03/2018: paper "A brief survey of DRL" + added slides on methods other than DQN and emphasized we are explaining DQN first.
+TODO: read more on deep reinforcement learning
+TODO: prepare for presentation
 * 2h, 15/03/2018: Give presentation + Attend presentations of fellow students
 * 2.5h, 21/03/2018: Attend presentations of fellow students
-* **total**: 34.5
+* **total**: 43.5
