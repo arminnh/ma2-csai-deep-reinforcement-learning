@@ -403,7 +403,7 @@ We will finish this document with the things we have learned whilst researching 
 For our first simulator we maybe saw things a bit too big.
 We wanted to showcase a really cool demo.
 That's why we decided to do deep reinforcement learning with self driving cars since they are all over the news.
-We quickly found some cool simulations online namely \emph{DeepTraffic}\cite{MIT:deeptraffic} with a corresponding MIT course available on youtube\cite{MIT:selfdriving} and a simulator written in Unity for a Udacity course\cite{Udacity-course} that we could use for our demo.
+We quickly found some cool simulations online namely \emph{DeepTraffic}\cite{MIT:deeptraffic} with a corresponding MIT course available on youtube\cite{MIT:selfdriving-course} and a simulator written in Unity for a Udacity course\cite{Udacity-course} that we could use for our demo.
 We decided to go with the latter for our demo but since the former was a bit easier to start with, we started with DeepTraffic to get to know our subject.
 
 \subsection{DeepTraffic}
@@ -468,10 +468,29 @@ Sadly we had to stop our efforts of trying to use this simulator for our demo.
 After having spent too much time on scoring functions and getting the simulator up and running we came to the conclusion that the data from the simulator was not being sent fast enough.
 This was due to the websocket implementation they used. 
 We saw that the data would be buffered in-game and data would still be sent long time after we disabled the learning in the simulator.
-We thought that if we would change the websockets to tcp we would've gotten maybe a stable data stream but since this was not assured we decided we've lost way too much time with this already and we decided to move on to our second simulator.
+We didn't immediately found a way to stop the simulation when a frame would be send (we're no Unity pro's) so we thought that if we would change the websockets to tcp we would've gotten maybe a stable data stream.
+Since this was not assured we decided we've lost way too much time with this already and we decided to move on to our second simulator.
 \section{Second simulator}
-\subsection{Flash games}
+Obviously, for our second simulator we wanted to find something that would have a predefined scoring function such that we shouldn't spend too much time with that and also the game should wait for the input of the agent.
+We stumbled upon the gym environment from OpenAI\cite{1802.09464}.
+This environment has a extensive library of games playable for an A.I. from text games to even 3D games. The best part is that it also has the Atari games mentioned in the Nature paper. This meant that we could implement the paper and try the same games.
+\subsection{Implementation}
+For the implementation we decided to use python and PyTorch\cite{PyTorch} again.
+We started this implementation by closely following the paper.
+We sadly enough came across bugs that lasted for quite some hours to find. 
+In the end we just started a new since we couldn't find these bugs and this time we got it right!
+Our agent was finally learning on Pong!
+We also implemented our agent in a notebook to make it more clear for people who would want to look at our implementation.
 \subsection{Atari games}
+The Atari games that we tried are: Pong, Freeway, \textbf{Meer games testen}.
+
+We found that for these games our agent took the following time to have a winning strategy.
+\textbf{todo zet tabel in met alle waardes}.
+
+\subsection{Other games}
+The original paper was written by using Atari games, therefor we wanted to test it out for other games. 
+We found a game that resembles what SpaceX is doing. The aim of the game is to land a SpaceX shuttle on a platform. We trained the agent for 24 hours but there was no improvement in it's score. 
+
 \subsection{Reinforcement learning}
 
 
@@ -613,24 +632,8 @@ The conclusion goes here.
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
-
-\bibitem{Udacity-course}
-https://eu.udacity.com/course/self-driving-car-engineer-nanodegree--nd013
-
-\bibitem{MIT:deeptraffic}
-Deeptraffic.js, https://selfdrivingcars.mit.edu/deeptraffic/
-
-\bibitem{MIT:selfdriving-course}
-L.~Fridman, MIT 6.S094: \emph{Deep Learning}, https://selfdrivingcars.mit.edu/
-
-\bibitem{Pytorch}
-http://pytorch.org/
-
-\end{thebibliography}
-
-
-
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
 
 % that's all folks
 \end{document}
