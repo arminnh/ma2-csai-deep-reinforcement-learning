@@ -473,15 +473,16 @@ Since this was not assured we decided we've lost way too much time with this alr
 \section{Second simulator}
 Obviously, for our second simulator we wanted to find something that would have a predefined scoring function such that we shouldn't spend too much time with that and also the game should wait for the input of the agent.
 We stumbled upon the gym environment from OpenAI\cite{1802.09464}.
-This environment has a extensive library of games playable for an A.I. from text games to even 3D games. The best part is that it also has the Atari games mentioned in the Nature paper. This meant that we could implement the paper and try the same games.
+This environment has a extensive library of games playable for an A.I. from text games to even 3D games. 
 \subsection{Implementation}
-For the implementation we decided to use python and PyTorch\cite{PyTorch} again.
-We started this implementation by closely following the paper.
+For the implementation we decided to use python and PyTorch \cite{PyTorch} again.
+We started this implementation by closely following the nature paper\cite{mnih2015humanlevel}.
 We sadly enough came across bugs that lasted for quite some hours to find. 
-In the end we just started a new since we couldn't find these bugs and this time we got it right!
+In the end we just started again from an empty file since we couldn't find these bugs and this time we got it right!
 Our agent was finally learning on Pong!
 We also implemented our agent in a notebook to make it more clear for people who would want to look at our implementation.
 \subsection{Atari games}
+In the human-level control through deep reinforcement paper they used Atari games that's why we wanted to test these games.
 The Atari games that we tried are: Pong, Freeway, \textbf{Meer games testen}.
 
 We found that for these games our agent took the following time to have a winning strategy.
@@ -489,10 +490,14 @@ We found that for these games our agent took the following time to have a winnin
 
 \subsection{Other games}
 The original paper was written by using Atari games, therefor we wanted to test it out for other games. 
-We found a game that resembles what SpaceX is doing. The aim of the game is to land a SpaceX shuttle on a platform. We trained the agent for 24 hours but there was no improvement in it's score. 
+We found a game called ``RocketLander''\cite{RocketLander} that resembles what SpaceX is doing now. The aim of the game is to land a space shuttle on a platform. We trained the agent for 24 hours but there was no real improvement in it's score. 
+We then tried a flashgame called ``DuskDrive'' 
 
 \subsection{Reinforcement learning}
 
+
+\section{Other DQN}
+\section{Curiosity learning}
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
