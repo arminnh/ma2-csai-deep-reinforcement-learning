@@ -14,6 +14,8 @@ from atari_wrappers import WarpFrame, FrameStack, ClipRewardEnv
 
 
 use_cuda = torch.cuda.is_available()
+if use_cuda:
+    torch.cuda.set_device(1)
 FloatTensor = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
 LongTensor = torch.cuda.LongTensor if use_cuda else torch.LongTensor
 ByteTensor = torch.cuda.ByteTensor if use_cuda else torch.ByteTensor
@@ -48,8 +50,8 @@ class ExperienceMemory:
             next_state_batch.append(s[3])
             done_batch.append(s[4])
 
-        return np.asarray(state_batch), np.asarray(action_batch), np.asarray(reward_batch), np.asarray(
-            next_state_batch), np.asarray(done_batch)
+        return np.asarray(state_batch), np.asarray(action_batch), np.asarray(reward_batch), \
+               np.asarray(next_state_batch), np.asarray(done_batch)
 
 
 # Environment according to deepmind's paper "Human Level Control Through Deep Reinforcement Learning"
@@ -171,6 +173,23 @@ class Agent:
         loss.backward()
         self.optimizer.step()
 
+    def load_agent(self, file):
+        self.Q.load_state_dict(torch.load(file))
+        self.sync_target_q()
+
+    def save_agent(self, episode):
+        torch.save(self.Q.state_dict(), "agent_episode_{}.pth".format(episode))
+
+    def play(self, episodes):
+        for episode in range(1, episodes+1):
+            state = self.env.reset()
+            for _ in count(start=1):
+                action = self.get_action(0, state)
+                state, reward, done, _ = self.env.step(action)
+                self.env.render()
+                if done:
+                    break
+
     def train(self, episodes, sync_target=10000, max_eploration=10**5, end_eps=0.1, start_eps=1, batch_size=32):
         steps = 0
         for episode in range(1, episodes + 1):
@@ -203,7 +222,8 @@ class Agent:
             print("Episode: {} finished".format(episode))
             # information stuff
             if (episode % 10) == 0:
-                print("--- Episode {} ---".format(episode))
+                print("--- Saving episode {} ---".format(episode))
+                self.save_agent(episode)
                 print("Episode reward: {}".format(current_reward))
                 print("Eps: {}".format(current_eps))
 
@@ -211,3 +231,7 @@ class Agent:
 if __name__ == '__main__':
     agent = Agent("PongDeterministic-v4")
     agent.train(1000)
+
+    # agent.load_agent("agent_episode_{}.pth".format(1))
+    # agent.play(1)
+    # agent.env.close()

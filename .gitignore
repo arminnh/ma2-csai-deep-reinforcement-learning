@@ -1,3 +1,5 @@
+agent_episode_*
+
 #Python notebooks
 .ipynb_checkpoints
 
