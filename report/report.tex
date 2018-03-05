@@ -21,7 +21,7 @@
 %% Legal Notice:
 %% This code is offered as-is without any warranty either expressed or
 %% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% FITNESS FOR A PARTICULAR PURPOSE!
 %% User assumes all risk.
 %% In no event shall the IEEE or any contributor to this code be liable for
 %% any damages or losses, including, but not limited to, incidental,
@@ -136,7 +136,7 @@
 % graphicx was written by David Carlisle and Sebastian Rahtz. It is
 % required if you want graphics, photos, etc. graphicx.sty is already
 % installed on most LaTeX systems. The latest version and documentation
-% can be obtained at: 
+% can be obtained at:
 % http://www.ctan.org/pkg/graphicx
 % Another good source of documentation is "Using Imported Graphics in
 % LaTeX2e" by Keith Reckdahl which can be found at:
@@ -320,7 +320,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Human-level control through deep reinforcement learning}
+\title{DRAFT\\Human-level control through deep reinforcement learning}
 
 
 % author names and affiliations
@@ -340,10 +340,10 @@
 
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
-% 
+%
 %\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
 %Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
+%James Kirk\IEEEauthorrefmark{3},
 %Montgomery Scott\IEEEauthorrefmark{3} and
 %Eldon Tyrell\IEEEauthorrefmark{4}}
 %\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
@@ -392,112 +392,104 @@
 
 \section{Introduction}
 % no \IEEEPARstart
-For the course ``Capita selecta: Artificial Intelligence'' we received the subject of \emph{deep reinforcement learning}.
-In this document we will explain everything we have done to get to know this subject. 
-We will first start with our original plan we had for the demo, what we did with it and what eventually went wrong.
-We will also mention the things we learned from this experience.
-Then, we will explain to which other simulator we switched and how things went from there and which simulations we ran.
-We will finish this document with the things we have learned whilst researching this subject.
+For the course ``Capita selecta: Artificial Intelligence'', we were assigned to do a presentation on \emph{human-level control through deep reinforcement learning }.\\
+In this document, we explain everything we have done in order to get to know this topic and to build a demo for the presentation.
+% First, we start with the original plan we had for the demo, how we tried to implement it, and what eventually went wrong. We also mention things we learned from this experience.
+% Then, we will explain the other simulator we switched to and how things went from there and which simulations we ran.
+% We will finish this document with the things we have learned whilst researching this subject.
 
-\section{First simulator}
-For our first simulator we maybe saw things a bit too big.
-We wanted to showcase a really cool demo.
-That's why we decided to do deep reinforcement learning with self driving cars since they are all over the news.
-We quickly found some cool simulations online namely \emph{DeepTraffic}\cite{MIT:deeptraffic} with a corresponding MIT course available on youtube\cite{MIT:selfdriving-course} and a simulator written in Unity for a Udacity course\cite{Udacity-course} that we could use for our demo.
-We decided to go with the latter for our demo but since the former was a bit easier to start with, we started with DeepTraffic to get to know our subject.
+\section{Self driving cars}
+After reading the paper \cite{mnih2015humanlevel} we were given, we decided that the main goal of our presentation would be to create an agent that can learn to do a task by using deep reinforcement learning. We set out to find an interesting task that would allow us to show a cool demo.\\
+It didn't take long for us to think of an application where human-level control is important - self driving cars. This is a very popular application at the moment and it is one that is very interesting to both of us. Conveniently, we quickly stumbled upon a (free) relevant course by MIT, named "Deep Learning for Self-Driving Cars" \cite{MIT:selfdriving-course}. We watched the full playlist of this course on YouTube to get to know more about the topic and relevant methods.
 
 \subsection{DeepTraffic}
+At the end of the MIT course, \emph{DeepTraffic} is introduced to the students. DeepTraffic is a deep reinforcement learning competition. It allows students to compete in creating the neural network that can swiftly manoeuvre a vehicle as fast as possible through traffic without causing collisions. The vehicle drives in a very simple 2D environment (written in JavaScript so that it can run in browsers). An example of this can be found in figure \ref{fig:deep-traffic}. The environment provides different features that can be used by neural networks, such as the distance to the car in front, or the amount of cars to the sides of the vehicle.
+
 \begin{figure}[!t]
 \centering
 \includegraphics[width=1in]{DeepTraffic.png}
 \caption{The DeepTraffic simulator\cite{MIT:deeptraffic}}
-\label{deep-traffic}
+\label{fig:deep-traffic}
 \end{figure}
 
-The DeepTraffic simulator (which can be seen in figure \ref{deep-traffic}) is a simulator written in javascript that works in a browser.
-The goal of the simulator is to make an agent that can swiftly maneuver between traffic without making collisions.
-The agent's reward is based on its speed. A high speed means a high reward and a low speed means a low reward. 
-The nice thing about DeepTraffic is that it also has a MIT course\cite{MIT:selfdriving-course} that explains a whole lot of things about self driving cars.
-To prepare ourselves for the task we wanted to accomplish, we watched the full play list (only five video's in total) of this course available on youtube. 
+We have experimented a bit with this application to get a first feel for creating neural networks. With a little tinkering, we achieved a top speed of 69mph (the maximum is 80).
 
-Once we finished the playlist we started with an implementation for this simulator. We created two agents that could respectively go $67$ mph and $69$ mph. This was not the best speed of all time but for us it was a good way to get our feet wet with deep reinforcement learning. The lectures were also very informative about self driving cars. Once we finished this we decided to finally start with the demo we wanted to show.
+\subsection{Environment requirements}
+DeepTraffic was a nice way to get to know deep learning, but we decided it would be too simple to use it as our demo. We wanted to create something more akin to the given paper, where the agent learns from pixels, instead of handcrafted features.
 
-\subsection{Unity self driving car simulator}
+We planned out what kind of network we wanted to use to train a self driving car: we would start with a couple of convolutional layers to process the input, followed by two or more fully connected layers to generate the output. The inputs would consist of an image of the view in front of the car, the velocity of the car, the acceleration of the car, and the angle of the steering wheel. The possible outputs would be accelerate, brake, move left, move right, brake, do nothing. We also came up with a few heuristics for rewards (reward higher velocity, punish moving off of the track, etc.).
+
+This lead us to a set of requirements that a virtual environment would need to satisfy so that we could use our planned network. The virtual environment would need to support:
+\begin{itemize}
+    \item A virtual car, along with methods to drive car.
+    \item Tracks for the car to drive on.
+    \item An extra camera in the virtual world (from the perspective of a driver) that allow for image streams to be used as input to the NN.
+    \item A way to retrieve the following data of the car: velocity, acceleration, angle of steering wheel.
+    \item A way to know if the car is still on the track.
+    \item A way to link the car camera to the input of the NN and the output of the NN to the car controls.
+\end{itemize}
+
+\subsection{Udacity's Self-Driving Car Simulator}
+The requirements above drove us to% heh, get it? drove?
+to a simulator written in Unity for a Udacity course \cite{Udacity-course}. This environment satisfied all of our requirements, so we chose to use for our demo. A view of this is visible in figure \ref{fig:udacity}.
+
 \begin{figure}[!t]
 \centering
 \includegraphics[width=3in]{Udacity-Simulator}
-\caption{The Unity simulator for the udacity ourse\cite{Udacity-course}}
-\label{Udacity}
+\caption{A view in Udacity's Self-Driving Car Simulator}
+\label{fig:udacity}
 \end{figure}
 
-For our original demo we planned to use the self driving car simulator in Unity that was written for a Udacity course\cite{Udacity-course}.
-The goal of our demo would've been to create an agent that could ride between the lines on a track.
-To do this we had to do some changes to this simulator since it was originally written to do behavioral cloning, this is where a human first shows the A.I. what to do and the agent then has to copy this behavior.
-The changes were rather small, we added a extra text field on the UI and we added a way to know if the car was still on the track or not, we then had to make sure that the simulator could talk with our program.
-This wasn't that hard since the simulator already had a way to send data to an external script by using websockets and the course provided a start template script written in python.
-How the game world looked like can be seen on figure \ref{Udacity}.
+The goal of our demo at this point was to create an agent that could learn to drive in tracks created in this simulator, and finish the tracks as fast as possible. As the simulator was originally built to do behavioral cloning (where the AI learns from humans and tries to copy them), we had to do make changes to its code. The changes were rather small, we added a extra text field in the UI, and we added a way to know if the car was still on the track or not. We then had to make sure that the simulator could interact with our neural network.\\
+That wasn't too hard, since the simulator already had a way to send data to an external script by using websockets, and the course provided a template script written in python.
 \newline
 \newline
-We used Pytorch\cite{Pytorch} to create a implementation of the DQN. 
-We spent quite some time on creating a good scoring function to describe the task we wanted to do. 
-This step was necessary since the simulator didn't have a reward function. 
-Which functions we tried and the ways our A.I. exploited these functions will be explained in the next section.
-\subsubsection{Scoring functions}
-An important part in reinforcement learning is the creating of a good scoring function. 
-Every small unintended ``bug'' in a scoring function will be exploited by the agent so the creation of such a function should be done with care. We tried several scoring functions but we will describe here the two scoring functions in which the agent found actually a way to beat our intention!
+We used Pytorch \cite{PyTorch} to create a implementation of the DQN. We spent quite some time on creating a good reward function to describe the task we wanted to do. This step was necessary since the simulator didn't have a reward function. The functions we tried and the ways our A.I. exploited these functions will be explained in the next section.
 
-The first scoring function that was exploited by our agent was a function based on lifetime having a higher weight than speed.
-	Our idea was that if the agent would live as long as possible it would progress through the track. 
-	\begin{displaymath}
-touch\_track(speed + 10*time\_alive ) - 10*(1-touch\_track)
-	\end{displaymath}	
-Sadly enough this didn't really happen.
-The agent quickly found out that just by standing still it would get the highest score!
+\subsubsection{Reward functions}
+An important part in reinforcement learning is creating a good reward function. Every small, unintended ``bug'' in a reward function will be exploited by the agent, so the creation of such a function should be done with care. Ideally, the reward function should be set up such that the agent does exactly what you want it to do and nothing else. This means that the designer will have to think about how the reward function will react for every possible scenario in the environment, which is impossible for any realistic environment. See \cite{drl-doesnt-work-yet} for more info on this topic.
 
-For our second function we learned that giving more weight to the time alive was not beneficial.
-That's why we created a new function where speed and time alive were as important.
+We tried several reward functions, but we will describe two reward functions for which the agent found an interesting way to beat our intention.
 
-\begin{displaymath}
-touch\_track(speed * time\_alive ) - 10*(1-touch\_track)
-\end{displaymath}
-	
-With this function the agent found that it could actually drive in a circle between the two lines of the track whilst still moving at a high velocity.
+The first reward function that was exploited by our agent was a function based on lifetime having a higher weight than speed.
+$$on\_track(speed + 10*time\_alive ) - 10*(1-on\_track)$$
+Our idea was that if the agent would live as long as possible it would progress through the track. However, we noticed that didn't really happen. The agent quickly found out that just by standing still it would get the highest score!
+
+For our second function, we learned that giving more weight to the time alive was not that beneficial. That's why we created a new function where speed and time alive were as important.
+$$on\_track(speed * time\_alive ) - 10*(1-on\_track)$$
+With this function, the agent found that it could actually drive in a circle between the two lines of the track whilst still moving at a high velocity.
 
 \subsubsection{Problems with the simulator}
 Sadly we had to stop our efforts of trying to use this simulator for our demo.
-After having spent too much time on scoring functions and getting the simulator up and running we came to the conclusion that the data from the simulator was not being sent fast enough.
-This was due to the websocket implementation they used. 
+After having spent too much time on reward functions and getting the simulator up and running we came to the conclusion that the data from the simulator was not being sent fast enough.
+This was due to the websocket implementation used in the simulator.
 We saw that the data would be buffered in-game and data would still be sent long time after we disabled the learning in the simulator.
-We didn't immediately found a way to stop the simulation when a frame would be send (we're no Unity pro's) so we thought that if we would change the websockets to tcp we would've gotten maybe a stable data stream.
-Since this was not assured we decided we've lost way too much time with this already and we decided to move on to our second simulator.
-\section{Second simulator}
-Obviously, for our second simulator we wanted to find something that would have a predefined scoring function such that we shouldn't spend too much time with that and also the game should wait for the input of the agent.
-We stumbled upon the gym environment from OpenAI\cite{1802.09464}.
-This environment has a extensive library of games playable for an A.I. from text games to even 3D games. 
-\subsection{Implementation}
-For the implementation we decided to use python and PyTorch \cite{PyTorch} again.
-We started this implementation by closely following the nature paper\cite{mnih2015humanlevel}.
-We sadly enough came across bugs that lasted for quite some hours to find. 
-In the end we just started again from an empty file since we couldn't find these bugs and this time we got it right!
-Our agent was finally learning on Pong!
-We also implemented our agent in a notebook to make it more clear for people who would want to look at our implementation.
-\subsection{Atari games}
-In the human-level control through deep reinforcement paper they used Atari games that's why we wanted to test these games.
-The Atari games that we tried are: Pong, Freeway, \textbf{Meer games testen}.
+We didn't immediately find a way to stop the simulation when a frame would be sent, so we thought that if we would change the websockets to tcp we might have gotten a stable data stream. Since this was not assured, we decided we've lost too much time with this already and decided to move on to a different simulator.
 
-We found that for these games our agent took the following time to have a winning strategy.
-\textbf{todo zet tabel in met alle waardes}.
+\section{Playing games}
+We stepped down from our idea to build a self driving car agent. Our main goal now was to find an environment in which could integrate our neural network in an easy way. Also, we wanted the environment to be able to provide rewards for actions, so that we wouldn't have to create any reward functions.
+
+We stumbled upon the gym environment from OpenAI's \cite{openai-gym} Gym environment. Gym provides an extensive library of games playable for A.I. agents, from text games to even 3D games. This is when the plan for out demo changed from creating an agent that can learn to drive a car, to one that can learn to play a variety of games.
+
+\subsection{Implementation}
+For the implementation we decided to use python and PyTorch \cite{PyTorch} again. We started this implementation by closely following Deepmind's DQN \cite{mnih2015humanlevel}. However, we came across bugs that took quite some hours to fix. In the end, we just started again from an empty file, since we couldn't find these bugs, and this time we got it right! Our agent was finally learning on Pong. We also implemented our agent in a notebook to make it more clear for people who would want to look at our implementation. % Heeft da iets van meerwaarde vs. main.py?
+
+\subsection{Atari games}
+In the paper we were given (Human-level control through deep reinforcement learning) \cite{mnih2015humanlevel}, Atari games were used to show off the capabilities and performance of the proposed DQN algorithm. Since Gym provides functinoality to easily simulate Atari games, we decided to test our implementation on those games. The Atari games that we tried are: Pong, Freeway, \textbf{TODO: Meer games testen}.
 
 \subsection{Other games}
-The original paper was written by using Atari games, therefor we wanted to test it out for other games. 
-We found a game called ``RocketLander''\cite{RocketLander} that resembles what SpaceX is doing now. The aim of the game is to land a space shuttle on a platform. We trained the agent for 24 hours but there was no real improvement in it's score. 
-We then tried a flashgame called ``DuskDrive'' 
+We found a game called ``RocketLander'' \   cite{RocketLander}, in which the goal is to carefully guide a rocket to landing pads. We found that the network never performed well in this game. We suspect this is due to it's inherent complexity being a level higher than the Atari games, which can mostly be played in a reactionary way. RocketLander requires more strategy in landing the rocket correctly.
 
-\subsection{Reinforcement learning}
+\section{Other deep reinforcement learning methods}
+\textbf{TODO: finish section}.
+After we finished building the demo, we...
+Papers: "A Brief Survey of Deep Reinforcement Learning" \cite{brief-survey}, "Dueling Network Architectures for Deep Reinforcement Learning" \cite{dueling}, en "Deep Recurrent Q-Learning for Partially Observable MDPs" \cite{drqn}.
 
-
-\section{Other DQN}
 \section{Curiosity learning}
+\textbf{TODO: finish section}.
+
+\section{Conclusion}
+\textbf{TODO: finish section}.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -515,7 +507,7 @@ We then tried a flashgame called ``DuskDrive''
 %\begin{figure}[!t]
 %\centering
 %\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
+% where an .eps filename suffix will be assumed under latex,
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
 %\caption{Simulation results for the network.}
@@ -531,7 +523,7 @@ We then tried a flashgame called ``DuskDrive''
 % The subfigure \label commands are set within each subfloat command,
 % and the \label for the overall figure must come after \caption.
 % \hfil is used as a separator to get equal spacing.
-% Watch out that the combined width of all the subfigures on a 
+% Watch out that the combined width of all the subfigures on a
 % line do not exceed the text width or a line break will occur.
 %
 %\begin{figure*}[!t]
@@ -588,16 +580,10 @@ We then tried a flashgame called ``DuskDrive''
 % in-text middle ("here") positioning is typically not used, but it
 % is allowed and encouraged for Computer Society conferences (but
 % not Computer Society journals). Most IEEE journals/conferences use
-% top floats exclusively. 
+% top floats exclusively.
 % Note that, LaTeX2e, unlike IEEE journals/conferences, places
 % footnotes above bottom floats. This can be corrected via the
 % \fnbelowfloat command of the stfloats package.
-
-
-
-
-\section{Conclusion}
-The conclusion goes here.
 
 
 
@@ -642,5 +628,3 @@ The conclusion goes here.
 
 % that's all folks
 \end{document}
-
-
