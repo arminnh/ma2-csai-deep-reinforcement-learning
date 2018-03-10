@@ -22,10 +22,12 @@
 * 1h, 25/02/2018: editing slides
 * 2h, 27/02/2018: editing slides
 * 2h, 28/02/2018: Attend presentations of fellow students
-* 2h, 1/01/2018: Just started new with the implementation, magically fixed all problems
+* 2h, 1/02/2018: Just started new with the implementation, magically fixed all problems
+* 2h, 2/02/2018: Starting to work on paper
+* 3h, 3/02/2018: continuing work for paper
 * 2h, 15/03/2018: Give presentation + Attend presentations of fellow students
 * 2.5h, 21/03/2018: Attend presentations of fellow students
-* **total**: 68
+* **total**: 72
 
 ## Armin
 * 2h, +- 01/11/2017: read given paper
