@@ -78,6 +78,7 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 - [Human-level control through deep reinforcement learning](https://deepmind.com/research/publications/human-level-control-through-deep-reinforcement-learning/)
 - [A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/abs/1708.05866)
 - [Dueling Network Architectures for Deep Reinforcement Learning](https://arxiv.org/abs/1511.06581)
+- [Deep Recurrent Q-Learning for Partially Observable MDPs](https://arxiv.org/abs/1507.06527)
 - [Curiosity-driven Exploration by Self-supervised Prediction](https://arxiv.org/pdf/1705.05363.pdf)
 - [A REINFORCEMENT LEARNING ALGORITHM FOR NEURAL NETWORKS WITH INCREMENTAL LEARNING ABILITY](http://www2.kobe-u.ac.jp/~ozawasei/pub/iconip02a.pdf)
 - [DEEP REINFORCEMENT LEARNING: AN OVERVIEW](https://arxiv.org/pdf/1701.07274.pdf)
