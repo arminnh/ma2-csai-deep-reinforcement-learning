@@ -486,10 +486,10 @@ After we finished building the demo, we...
 Papers: "A Brief Survey of Deep Reinforcement Learning" \cite{brief-survey}, "Dueling Network Architectures for Deep Reinforcement Learning" \cite{dueling}, en "Deep Recurrent Q-Learning for Partially Observable MDPs" \cite{drqn}.
 
 \section{Curiosity learning}
-\textbf{TODO: finish section}.
+We stumbled upon curiosity learning when looking for papers for our subject. A major drawback for normal deep reinforcement learning is that you need to define a specific reward function such that the agent can learn. For some games defining such a function is not easy \cite{YoutubeMontezuma}. Sometimes there is not even a reward after a long period of time until you perform a series of actions to get some item. This can give some problems for an agent to learn an optimal strategy. Even after millions of frames the agent doesn't learn anything good. A way to solve this is by making the agent curious. Instead of us defining a scoring function the agent will create its own scoring function. The way this is done is by creating a neural network that predicts how the agent should go from state $\phi_i$ to state $\phi_{i+1}$. The distance between the predicted action and the expected action is defined as the new scoring function. Since we were out of time we couldn't try to implement this ourselves.
 
 \section{Conclusion}
-\textbf{TODO: finish section}.
+During our research to define what gives an agent human-level control through deep reinforcement learning we came across a lot of different things. We have tried multiple implementations that sadly didn't work out but in the end we got it right! We learned a great deal about this subject but also about things that might come in the near future. The only thing we would change if we had to redo this project is spent way less time on our too complex environments that didn't work. 
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
