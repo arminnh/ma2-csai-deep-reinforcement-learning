@@ -8,6 +8,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
+import os
 from torch.autograd import Variable
 
 from atari_wrappers import WarpFrame, FrameStack, ClipRewardEnv
@@ -178,7 +179,10 @@ class Agent:
         self.sync_target_q()
 
     def save_agent(self, episode):
-        torch.save(self.Q.state_dict(), "agent_episode_{}.pth".format(episode))
+        if not os.path.exists("saved_model/"):
+            os.makedirs("saved_model/")
+
+        torch.save(self.Q.state_dict(), "saved_model/agent_episode_{}.pth".format(episode))
 
     def play(self, episodes):
         for episode in range(1, episodes+1):
@@ -192,6 +196,7 @@ class Agent:
 
     def train(self, episodes, sync_target=10000, max_eploration=10**5, end_eps=0.1, start_eps=1, batch_size=32):
         steps = 0
+        self.save_agent(0)
         for episode in range(1, episodes + 1):
             state = self.env.reset()
 
@@ -226,6 +231,9 @@ class Agent:
                 self.save_agent(episode)
                 print("Episode reward: {}".format(current_reward))
                 print("Eps: {}".format(current_eps))
+
+            if (current_reward) >= 19:
+                self.save_agent("final")
 
 
 if __name__ == '__main__':
