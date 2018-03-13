@@ -22,10 +22,12 @@
 * 1h, 25/02/2018: editing slides
 * 2h, 27/02/2018: editing slides
 * 2h, 28/02/2018: Attend presentations of fellow students
-* 2h, 1/01/2018: Just started new with the implementation, magically fixed all problems
+* 2h, 1/02/2018: Just started new with the implementation, magically fixed all problems
+* 2h, 2/02/2018: Starting to work on paper
+* 3h, 3/02/2018: continuing work for paper
 * 2h, 15/03/2018: Give presentation + Attend presentations of fellow students
 * 2.5h, 21/03/2018: Attend presentations of fellow students
-* **total**: 68
+* **total**: 72
 
 ## Armin
 * 2h, +- 01/11/2017: read given paper
@@ -39,7 +41,11 @@
 * 1h, 28/02/2018: Rewrote readme for different aspects of the project. Fixed references. Removed unnecessary files.
 * 2h, 28/02/2018: Attend presentations of fellow students
 * 3.5h, 02/03/2018: Added basic reinforcement learning algorithm. Updated slides, project structure, some code, readme, report template. Research for DRL papers
-TODO: read more on deep reinforcement learning, prepare for presentation
+* 3h, 03/03/2018: Updated and reordered slides about DRL, added sources and rewrote references slide. Updated main.py load/save/play functions
+* 6h, 03/03/2018: paper "A brief survey of DRL" + added slides on methods other than DQN and emphasized we are explaining DQN first.
+* 2.5h, 04/03/2018: Rewrote report more formally, edited section structure, added new bits. Updated presentation.
+* 2h, 09/03/2018: Worked out some of professor's feedback in slides. Added texts to say in notes of presentation.
+* 1h, 11/03/2018: Slides: dueling network, DRQN, q-learning, DQN code summary
 * 2h, 15/03/2018: Give presentation + Attend presentations of fellow students
 * 2.5h, 21/03/2018: Attend presentations of fellow students
-* **total**: 34.5
+* **total**: 48
