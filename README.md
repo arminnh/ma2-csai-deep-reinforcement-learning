@@ -4,22 +4,25 @@
 ## Components of the project
 
 ### Main goal
-Implementation of an agent, using deep reinforcement learning, that is able to learn to play a variety of (simple) games.
+A presentation on the topic "Human-level control through deep reinforcement learning". For our demo, we implemented an agent that is able to learn to play a variety of (simple) games using deep reinforcement learning.
 
-### Presentation (30 min):
+### Presentation (&plusmn;30 min):
 1. Intro to the problem this project tries to solve
-2. An refresher on reinforcement learning (Q-learning)
-3. An introduction to convolutional neural networks.
-4. Explanation on deep reinforcement learning
+2. An refresher on reinforcement learning
+3. An introduction to convolutional neural networks
+4. Deep reinforcement learning
 5. Demo!
 6. Curious Reinforcment Learning, a short section on what may come after deep reinforcement learning.
 
 ### Implementation
+The implementation of an agent that can successfully learn to play games can be found in [src/main.py](src/main.py).
 
 #### Neural network
-TODO: describe NN design (input 4 video frames -> convolutional layers -> fully connected layers -> output action)
+Our implementation closely follows Deepmind's Deep Q-Network.  
+The deep neural network takes as input 4 video frames (grayscale with resolution 84x84) and returns probabilities for next actions to take. It consists of 3 convolutional layers and 2 fully connected layers with ReLUs in between. The network uses Experience Replay and a target network as described in Deepmind's DQN paper.
 
 #### Virtual environment
+For the agent to learn to play games, we needed a virtual environment.
 
 ##### Requirements
 * Can host a variety of games
@@ -29,34 +32,24 @@ TODO: describe NN design (input 4 video frames -> convolutional layers -> fully 
 * Tracks to drive on
 
 The environment we ended up using OpenAI's Gym.  
-We originally started off with Udacity's Behavioral cloning project, but that path was not fruitful in the end, as we were not able to synchronise the data of the simulator with the separate neural network program correctly.  
+We originally started off with Udacity's Behavioral cloning project to create an agent for self driving cars. That path ended up being unfruitful, as we were not able to synchronise the data of the simulator with the separate neural network program correctly.  
 We then opted for a simpler approach in order to stay within the allocated time for this project. OpenAI's Gym library allowed us to write a working program in much less time. It also gave us the possibility to try out our network on a variety of different games.  
-TODO: expand more on this?
 
-### Curiosity learning
-TODO
+## Dependencies
+This project relies on the following python dependencies:
 
-## Installation
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-TODO: What things you need to install the software and how to install them
-
-    dep 1, dep 2, ... TODO
-
-### Installing
-TODO: A step by step series of examples that tell you have to get a development env running
-
-Install the Python dependencies
-```sh
-pip3 install -r requirements.txt
-```
+    numpy pytorch gym gym[atari]
 
 ## Usage
-TODO: A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-```sh
+The agent can be trained as follows
+```
 python3 main.py
+```
+The agent will start learning and will output the achieved score and save its network's weights every 10 episodes.
+
+The agent can afterwards be loaded and be used to play the game with
+```
+python3 play.py
 ```
 
 ## Built with
