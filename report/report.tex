@@ -475,21 +475,30 @@ We stumbled upon the gym environment from OpenAI's \cite{openai-gym} Gym environ
 For the implementation we decided to use python and PyTorch \cite{PyTorch} again. We started this implementation by closely following Deepmind's DQN \cite{mnih2015humanlevel}. However, we came across bugs that took quite some hours to fix. In the end, we just started again from an empty file, since we couldn't find these bugs, and this time we got it right! Our agent was finally learning on Pong. We also implemented our agent in a notebook to make it more clear for people who would want to look at our implementation. % Heeft da iets van meerwaarde vs. main.py?
 
 \subsection{Atari games}
-In the paper we were given (Human-level control through deep reinforcement learning) \cite{mnih2015humanlevel}, Atari games were used to show off the capabilities and performance of the proposed DQN algorithm. Since Gym provides functinoality to easily simulate Atari games, we decided to test our implementation on those games. The Atari games that we tried are: Pong, Freeway, \textbf{TODO: Meer games testen}.
+In the paper we were given (Human-level control through deep reinforcement learning) \cite{mnih2015humanlevel}, Atari games were used to show off the capabilities and performance of the proposed DQN algorithm. Since Gym provides functionality to easily simulate Atari games, we decided to test our implementation on those games. The Atari games that we tried are Pong, Freeway, and Space Invaders.
 
 \subsection{Other games}
-We found a game called ``RocketLander'' \   cite{RocketLander}, in which the goal is to carefully guide a rocket to landing pads. We found that the network never performed well in this game. We suspect this is due to it's inherent complexity being a level higher than the Atari games, which can mostly be played in a reactionary way. RocketLander requires more strategy in landing the rocket correctly.
+We found a game called ``Rocket Lander'' \cite{RocketLander}, in which the goal is to carefully guide a rocket to landing pads. We found that the network never performed well in this game. We suspect this is due to it's inherent complexity being a level higher than the Atari games, which can mostly be played in a reactionary way. Rocket Lander requires more strategy in landing the rocket correctly.
 
 \section{Other deep reinforcement learning methods}
-\textbf{TODO: finish section}.
-After we finished building the demo, we...
-Papers: "A Brief Survey of Deep Reinforcement Learning" \cite{brief-survey}, "Dueling Network Architectures for Deep Reinforcement Learning" \cite{dueling}, en "Deep Recurrent Q-Learning for Partially Observable MDPs" \cite{drqn}.
+After we finished the work for the demo, we investigated some other deep reinforcement learning methods. The paper "A Brief Survey of Deep Reinforcement Learning" \cite{brief-survey} describes many different methods that were introduced up to 2017. A lot of these were tweaks to the DQN algorithmm. The survey paper also introduced different classes of algorithms: model-free vs. model-based, and gradient-free vs. gradient-based. Some examples:
+\begin{itemize}
+    \item Model-free: DQN, DQRN, Dueling Network
+    \item Model-based: AlphaGo, Guided Policy Search, Continuous Deep Q-Learning with Model-based Acceleration
+    \item Gradient-free: Neural evolution strategies (NES), Covariance Matrix Adaptation ES (CMA-ES)
+    \item Gradient-based: AlphaGo, DQN, DQRN, Dueling Network
+\end{itemize}
+Model-free methods learn a policy or value function, while model-based methods learn a model of some kind (e.g. a dynamics model of walking around). Model-free methods suffer from large sample complexity, which is what model-based methods avoids. However, model-based methods fail to generalize well to a variety of complex tasks.
+
+We explored two other methods in more depth and explained their main approach in the presentation. The methods were "Dueling Network Architectures for Deep Reinforcement Learning" \cite{dueling}, and "Deep Recurrent Q-Learning for Partially Observable MDPs" \cite{drqn}.
 
 \section{Curiosity learning}
-We stumbled upon curiosity learning when looking for papers for our subject. A major drawback for normal deep reinforcement learning is that you need to define a specific reward function such that the agent can learn. For some games defining such a function is not easy \cite{YoutubeMontezuma}. Sometimes there is not even a reward after a long period of time until you perform a series of actions to get some item. This can give some problems for an agent to learn an optimal strategy. Even after millions of frames the agent doesn't learn anything good. A way to solve this is by making the agent curious. Instead of us defining a scoring function the agent will create its own scoring function. The way this is done is by creating a neural network that predicts how the agent should go from state $\phi_i$ to state $\phi_{i+1}$. The distance between the predicted action and the expected action is defined as the new scoring function. Since we were out of time we couldn't try to implement this ourselves.
+We stumbled upon curiosity learning when looking for papers for the project. A major drawback of deep reinforcement learning is that you need to define a specific reward function such that the agent can learn. For some goals, defining such a function is not easy \cite{YoutubeMontezuma}. Sometimes, there is no reward for a long period of time until a certain series of actions is performed. This makes it quite hard for an agent to learn an optimal strategy. Even after millions of frames, the agent doesn't learn anything good. We believe that this is why our implementation didn't perform well on Rocket Lander.
+
+A way to solve this is by making the agent curious. Instead of us defining a reward function, the agent will create one by itself. The way this is done is by creating a neural network that predicts how the agent should go from state $\phi_i$ to state $\phi_{i+1}$. The distance between the predicted action and the expected action is defined as the new reward function. Since we were out of time we couldn't try to implement this ourselves.
 
 \section{Conclusion}
-During our research to define what gives an agent human-level control through deep reinforcement learning we came across a lot of different things. We have tried multiple implementations that sadly didn't work out but in the end we got it right! We learned a great deal about this subject but also about things that might come in the near future. The only thing we would change if we had to redo this project is spent way less time on our too complex environments that didn't work. 
+During our research to find what gives an agent human-level control through deep reinforcement learning, we came across a lot of different methods. We have tried multiple approaches that didn't end up working out, but in the end we we were able to create such an agent successfully! We learned a great deal about this subject and also a bit about what might come in the near future. The only thing we would change if we had to redo this project, is spend way less time on environments that are too complex.
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
