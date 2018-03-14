@@ -133,6 +133,7 @@ class Agent:
             # so we add an extra dimension
             states = np.expand_dims(states, 0)
             actions = self.Q(Variable(torch.from_numpy(states)).type(FloatTensor))
+            print(np.argmax(actions.data.cpu().numpy()))
             return np.argmax(actions.data.cpu().numpy())
         else:
             return LongTensor([[random.randrange(self.env.action_space.n)]])
