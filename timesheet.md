@@ -46,6 +46,7 @@
 * 2.5h, 04/03/2018: Rewrote report more formally, edited section structure, added new bits. Updated presentation.
 * 2h, 09/03/2018: Worked out some of professor's feedback in slides. Added texts to say in notes of presentation.
 * 1h, 11/03/2018: Slides: dueling network, DRQN, q-learning, DQN code summary
+* 5h, 13/03/2018: More research on stability problems and solutions. Final version of report and presentation.
 * 2h, 15/03/2018: Give presentation + Attend presentations of fellow students
 * 2.5h, 21/03/2018: Attend presentations of fellow students
-* **total**: 48
+* **total**: 53

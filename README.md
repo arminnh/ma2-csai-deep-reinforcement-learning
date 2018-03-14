@@ -8,7 +8,7 @@ A presentation on the topic "Human-level control through deep reinforcement lear
 
 ### Presentation (&plusmn;30 min):
 1. Intro to the problem this project tries to solve
-2. An refresher on reinforcement learning
+2. A refresher on reinforcement learning
 3. An introduction to convolutional neural networks
 4. Deep reinforcement learning
 5. Demo!
