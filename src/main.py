@@ -176,7 +176,7 @@ class Agent:
         self.optimizer.step()
 
     def load_agent(self, file):
-        self.Q.load_state_dict(torch.load(file))
+        self.Q.load_state_dict(torch.load(file, map_location=lambda storage, loc: storage))
         self.sync_target_q()
 
     def save_agent(self, episode):
